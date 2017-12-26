@@ -62,6 +62,7 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
 
     @Override
     public void endGame() {
+        send("STOP");
         super.terminate();
     }
 

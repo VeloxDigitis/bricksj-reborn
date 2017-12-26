@@ -34,7 +34,14 @@ public abstract class StandardIOAlgorithm implements Algorithm {
 
     @Override
     public void terminate() {
-        process.destroy();
+        try {
+            Runtime.getRuntime().exec("taskkill /F /pid " + process.pid());
+            process.destroy();
+            reader.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void send(String message) {
