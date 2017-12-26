@@ -10,29 +10,26 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="me.veloxdigitis.bricksj.gui.PlayersController">
-    <VBox spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
-          AnchorPane.topAnchor="5.0">
-        <Label fx:id="playersAmount" text="0 players"/>
+<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.PlayersController">
+    <VBox spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <Label fx:id="playersAmount" text="0 players" />
         <ScrollPane fitToWidth="true" vbarPolicy="NEVER">
-            <ListView fx:id="playersList" prefHeight="300.0"/>
+            <ListView fx:id="playersList" prefHeight="300.0" />
         </ScrollPane>
         <GridPane hgap="5.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addPlayer" text="Add"/>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Dir" GridPane.columnIndex="1"/>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Remove"
-                    GridPane.columnIndex="2"/>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addPlayer" text="Add" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDir" text="Dir" GridPane.columnIndex="1" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Remove" GridPane.columnIndex="2" />
         </GridPane>
-        <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hide"
-                text="Done"/>
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadDesktop" text="Load all from desktop" />
+        <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hide" text="Done" />
     </VBox>
 </AnchorPane>
