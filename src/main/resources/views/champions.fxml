@@ -19,7 +19,7 @@
       <left>
          <BorderPane prefWidth="240.0" BorderPane.alignment="CENTER">
             <center>
-               <ListView fx:id="historyList" onMouseClicked="#replay" BorderPane.alignment="CENTER">
+               <ListView fx:id="historyList" BorderPane.alignment="CENTER">
                   <BorderPane.margin>
                      <Insets bottom="5.0" top="5.0" />
                   </BorderPane.margin>

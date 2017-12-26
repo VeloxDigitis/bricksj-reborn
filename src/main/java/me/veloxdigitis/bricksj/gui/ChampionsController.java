@@ -41,19 +41,17 @@ public class ChampionsController implements ChangeListener<Number> {
     @FXML
     public void initialize() {
         historyList.setItems(FXCollections.observableArrayList(history));
+        historyList.getSelectionModel().selectedItemProperty().
+                addListener((ObservableValue<? extends BattleHistory> observable, BattleHistory oldValue, BattleHistory newValue) -> replay(newValue));
         historyList.getSelectionModel().selectFirst();
         gameSlider.valueProperty().addListener(this);
         mapSizeLabel.setText(String.format("Map size %d", history.get(0).getMapSize()));
     }
 
-    private BattleHistory battle;
-
-    @FXML
-    private void replay() {
+    private void replay(BattleHistory battle) {
         gameSlider.adjustValue(0.0);
-        gameSlider.setMax(historyList.getSelectionModel().getSelectedItem().length());
+        gameSlider.setMax(battle.length());
         gameSlider.setMajorTickUnit(gameSlider.getMax() / 10);
-        battle = historyList.getSelectionModel().getSelectedItem();
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         currentGameLabel.setText(battle.toString());
@@ -65,6 +63,7 @@ public class ChampionsController implements ChangeListener<Number> {
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
+        BattleHistory battle = historyList.getSelectionModel().getSelectedItem();
         double slabSize = gameCanvas.getWidth() / battle.getMapSize();
         battle.getHistory().
                 stream().
