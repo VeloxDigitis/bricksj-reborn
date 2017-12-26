@@ -1,6 +1,7 @@
 package me.veloxdigitis.bricksj.history;
 
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
+import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
@@ -42,6 +43,10 @@ public class BattleHistory {
 
     public BrickPlayer getWinner() {
         return history.get(history.size() - 1).getPlayer();
+    }
+
+    public PlayersPair getPlayers() {
+        return new PlayersPair(history.get(0).getPlayer(), history.get(1).getPlayer());
     }
 
     @Override

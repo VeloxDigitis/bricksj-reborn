@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.info;
 
+import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.stats.Time;
@@ -24,11 +25,17 @@ public class SimpleHTMLHistoryInfoParser implements HistoryInfoParser {
     @Override
     public String parse(BattleHistory history) {
         Time time = new Time(history);
+        PlayersPair players = history.getPlayers();
         return HTML.
                 replaceAll("%title%",       history.toString()).
                 replaceAll("%winner%",      history.getWinner().toString()).
-                replaceAll("%winnermin%",   time.getMin(history.getWinner()) + "").
-                replaceAll("%winnermax%",   time.getMax(history.getWinner()) + "").
-                replaceAll("%winneravg%",   ((int)(time.getAverage(history.getWinner()) * 100) / 100.0) + "");
+                replaceAll("%a%",       players.get().toString()).
+                replaceAll("%amin%",   time.getMin(players.get()) + "").
+                replaceAll("%amax%",   time.getMax(players.get()) + "").
+                replaceAll("%aavg%",   ((int)(time.getAverage(players.get()) * 100) / 100.0) + "").
+                replaceAll("%b%",       players.getOpponent().toString()).
+                replaceAll("%bmin%",   time.getMin(players.getOpponent()) + "").
+                replaceAll("%bmax%",   time.getMax(players.getOpponent()) + "").
+                replaceAll("%bavg%",   ((int)(time.getAverage(players.getOpponent()) * 100) / 100.0) + "");
     }
 }

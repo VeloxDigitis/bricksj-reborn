@@ -49,7 +49,7 @@
       </left>
       <center>
          <AnchorPane>
-            <VBox alignment="CENTER" layoutX="30.0" layoutY="25.0">
+            <VBox alignment="CENTER" layoutX="15.0" layoutY="25.0">
                <Label fx:id="currentGameLabel" text="Current game">
                   <font>
                      <Font size="18.0" />
@@ -61,7 +61,7 @@
          </AnchorPane>
       </center>
       <right>
-         <BorderPane prefWidth="200.0" BorderPane.alignment="CENTER">
+         <BorderPane prefWidth="240.0" BorderPane.alignment="CENTER">
             <center>
                <WebView fx:id="infoView" prefHeight="-1.0" prefWidth="-1.0" />
             </center>
@@ -73,6 +73,9 @@
                   <Label text="Krzysztof Cybulski" />
                   <Label text="Damian Rybicki" />
                   <Label text="v 0.9 alpha" />
+                  <BorderPane.margin>
+                     <Insets top="5.0" />
+                  </BorderPane.margin>
                </VBox>
             </bottom>
             <padding>
