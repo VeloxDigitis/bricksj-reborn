@@ -34,6 +34,7 @@ public class PlayersController {
     @FXML
     public void initialize() {
         this.playersAmount.textProperty().bind(Bindings.size(players).asString().concat(" players"));
+        playersList.setItems(FXCollections.observableArrayList(players));
     }
 
     @FXML
