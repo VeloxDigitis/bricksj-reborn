@@ -18,7 +18,7 @@ public class PlayersPair {
         return a;
     }
 
-    public BrickPlayer getOponent() {
+    public BrickPlayer getOpponent() {
         return b;
     }
 

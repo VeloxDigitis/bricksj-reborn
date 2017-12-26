@@ -15,76 +15,69 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.ChampionsController">
-   <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <BorderPane prefWidth="200.0" BorderPane.alignment="CENTER">
-               <center>
-                  <ListView fx:id="historyList" onMouseClicked="#replay" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </BorderPane.margin></ListView>
-               </center>
-               <top>
-                  <VBox spacing="5.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label text="Bricks Judge" />
-                        <Separator prefWidth="200.0" />
-                        <Label fx:id="mapSizeLabel" text="Map 99x99" />
-                        <Label fx:id="randomBricksLabel" text="99 random bricks" />
-                        <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newChampions" text="New champions" />
-                     </children>
+<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.ChampionsController">
+   <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <left>
+         <BorderPane prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+               <ListView fx:id="historyList" onMouseClicked="#replay" BorderPane.alignment="CENTER">
+                  <BorderPane.margin>
+                     <Insets bottom="5.0" top="5.0"/>
+                  </BorderPane.margin>
+               </ListView>
+            </center>
+            <top>
+               <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                  <Label text="Bricks Judge"/>
+                  <Separator prefWidth="200.0"/>
+                  <Label fx:id="mapSizeLabel" text="Map 99x99"/>
+                  <Label fx:id="randomBricksLabel" text="99 random bricks"/>
+                  <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                          onAction="#newChampions" text="New champions"/>
+               </VBox>
+            </top>
+            <bottom>
+               <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#soloGame"
+                       text="Solo game" BorderPane.alignment="CENTER"/>
+            </bottom>
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+         </BorderPane>
+      </left>
+      <center>
+         <TabPane BorderPane.alignment="CENTER">
+            <Tab text="Game">
+               <AnchorPane>
+                  <VBox layoutX="65.0" layoutY="15.0">
+                     <Label fx:id="currentGameLabel" text="Current game"/>
+                     <Canvas fx:id="gameCanvas" height="400.0" width="400.0"/>
+                     <Slider fx:id="gameSlider" blockIncrement="1.0" majorTickUnit="500.0" max="5000.0"
+                             min="1.0" showTickMarks="true" value="1.0"/>
                   </VBox>
-               </top>
-               <bottom>
-                  <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#soloGame" text="Solo game" BorderPane.alignment="CENTER" />
-               </bottom>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </BorderPane>
-         </left>
-         <center>
-            <TabPane BorderPane.alignment="CENTER">
-               <tabs>
-                  <Tab text="Game">
-                     <content>
-                        <AnchorPane>
-                           <children>
-                              <VBox layoutX="65.0" layoutY="15.0">
-                                 <children>
-                                    <Label fx:id="currentGameLabel" text="Current game" />
-                                    <Canvas fx:id="gameCanvas" height="400.0" width="400.0" />
-                                    <Slider fx:id="gameSlider" blockIncrement="1.0" majorTickUnit="500.0" max="5000.0" min="1.0" showTickMarks="true" value="1.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
-         </center>
-         <right>
-            <BorderPane prefWidth="200.0" BorderPane.alignment="CENTER">
-               <center>
-                  <WebView fx:id="infoView" prefHeight="-1.0" prefWidth="-1.0" />
-               </center>
-               <bottom>
-                  <VBox spacing="5.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Hyperlink text="github.com/VeloxDigitis/bricksj-reborn" />
-                        <Label text="Krzysztof Cybulski" />
-                        <Label text="Damian Rybicki" />
-                        <Label text="v 0.9 alpha" />
-                     </children>
-                  </VBox>
-               </bottom>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </BorderPane>
-         </right></BorderPane>
-   </children>
+               </AnchorPane>
+            </Tab>
+         </TabPane>
+      </center>
+      <right>
+         <BorderPane prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+               <WebView fx:id="infoView" prefHeight="-1.0" prefWidth="-1.0"/>
+            </center>
+            <bottom>
+               <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                  <Hyperlink text="github.com/VeloxDigitis/bricksj-reborn"/>
+                  <Label text="Krzysztof Cybulski"/>
+                  <Label text="Damian Rybicki"/>
+                  <Label text="v 0.9 alpha"/>
+               </VBox>
+            </bottom>
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+         </BorderPane>
+      </right>
+   </BorderPane>
 </AnchorPane>

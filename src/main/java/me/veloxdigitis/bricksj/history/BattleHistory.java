@@ -10,9 +10,9 @@ import java.util.List;
 
 public class BattleHistory {
 
-    private String name;
-    private int mapSize;
-    private List<PlayerWithBrick> history;
+    private final String name;
+    private final int mapSize;
+    private final List<PlayerWithBrick> history;
 
     public BattleHistory(String name, int mapSize) {
         this.name = name;

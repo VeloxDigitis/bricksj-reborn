@@ -3,11 +3,7 @@ package me.veloxdigitis.bricksj.stats;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.history.PlayerWithBrick;
-import me.veloxdigitis.bricksj.map.Brick;
 
-import java.util.Optional;
-import java.util.OptionalDouble;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 

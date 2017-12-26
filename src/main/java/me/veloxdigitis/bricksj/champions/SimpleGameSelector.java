@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class SimpleGameSelector implements GameSelector{
 
-    private List<BrickPlayer> players;
+    private final List<BrickPlayer> players;
 
     public SimpleGameSelector(List<BrickPlayer> players) {
         this.players = players;

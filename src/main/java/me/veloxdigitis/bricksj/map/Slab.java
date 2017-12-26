@@ -18,7 +18,7 @@ public class Slab {
         return y;
     }
 
-    public boolean isNeighor(Slab slab) {
+    public boolean isNeighbor(Slab slab) {
         return Math.abs(slab.x - x) == 1 || Math.abs(slab.y - y) == 1;
     }
 

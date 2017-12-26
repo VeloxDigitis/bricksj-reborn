@@ -22,7 +22,7 @@ import java.util.Optional;
 
 public class PlayersController {
 
-    private ObservableList<BrickPlayer> players;
+    private final ObservableList<BrickPlayer> players;
 
     @FXML private Label playersAmount;
     @FXML private ListView<BrickPlayer> playersList;
@@ -38,7 +38,7 @@ public class PlayersController {
 
     @FXML
     public void addPlayer(ActionEvent event) {
-        loadAlgorithm(((Node)event.getTarget()).getScene().getWindow()).ifPresent(a -> players.add(a));
+        loadAlgorithm(((Node)event.getTarget()).getScene().getWindow()).ifPresent(players::add);
         playersList.setItems(FXCollections.observableArrayList(players));
     }
 

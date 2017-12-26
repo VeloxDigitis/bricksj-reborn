@@ -6,7 +6,7 @@ public class BrickMove {
 
     private Brick brick;
     private int time;
-    private BattleEndReason move;
+    private final BattleEndReason move;
 
     public BrickMove(BattleEndReason move) {
         this.move = move;

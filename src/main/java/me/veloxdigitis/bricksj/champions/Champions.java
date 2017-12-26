@@ -18,7 +18,7 @@ public class Champions implements Runnable {
     private final int initTime;
     private final int moveTime;
     private final GameSelector selector;
-    private ChampionsListener listener;
+    private final ChampionsListener listener;
 
     private final List<BattleHistory> history = new ArrayList<>();
 

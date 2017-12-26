@@ -1,74 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
-<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.SetupController">
-   <children>
-      <VBox prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-         <children>
-            <GridPane hgap="5.0" vgap="5.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Map size" GridPane.halignment="RIGHT" />
-                  <Label text="Random bricks" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label text="Initialization time" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                  <Label text="Move time" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <Spinner fx:id="mapSize" GridPane.columnIndex="1">
-                      <valueFactory>
-                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="99" max="999" min="9" />
-                      </valueFactory>
-                  </Spinner>
-                  <Spinner fx:id="randomBricks" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                      <valueFactory>
-                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="5" max="10" min="0" />
-                      </valueFactory>
-                  </Spinner>
-                  <Spinner fx:id="initTime" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                      <valueFactory>
-                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="10" initialValue="1000" max="2000" min="5" />
-                      </valueFactory>
-                  </Spinner>
-                  <Spinner fx:id="moveTime" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                      <valueFactory>
-                          <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="10" initialValue="500" max="1000" min="5" />
-                      </valueFactory>
-                  </Spinner>
-                  <Label fx:id="playersAmount" text="0 players" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openPlayersScene" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-               </children>
-            </GridPane>
-            <Separator prefWidth="200.0">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
-               </VBox.margin>
-            </Separator>
-            <Button fx:id="startBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openChampionsScene" text="Run champions" />
-            <ProgressBar fx:id="progressBar" disable="true" prefWidth="200.0" progress="0.0">
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></ProgressBar>
-         </children>
-      </VBox>
-   </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="me.veloxdigitis.bricksj.gui.SetupController">
+    <VBox prefWidth="100.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+          AnchorPane.topAnchor="5.0">
+        <GridPane hgap="5.0" vgap="5.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <Label text="Map size" GridPane.halignment="RIGHT"/>
+            <Label text="Random bricks" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+            <Label text="Initialization time" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+            <Label text="Move time" GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
+            <Spinner fx:id="mapSize" GridPane.columnIndex="1">
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="99" max="999"
+                                                                    min="9"/>
+                </valueFactory>
+            </Spinner>
+            <Spinner fx:id="randomBricks" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="5" max="10"
+                                                                    min="0"/>
+                </valueFactory>
+            </Spinner>
+            <Spinner fx:id="initTime" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="10" initialValue="1000"
+                                                                    max="2000" min="5"/>
+                </valueFactory>
+            </Spinner>
+            <Spinner fx:id="moveTime" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <valueFactory>
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="10" initialValue="500"
+                                                                    max="1000" min="5"/>
+                </valueFactory>
+            </Spinner>
+            <Label fx:id="playersAmount" text="0 players" GridPane.halignment="RIGHT" GridPane.rowIndex="4"/>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openPlayersScene"
+                    text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        </GridPane>
+        <Separator prefWidth="200.0">
+            <VBox.margin>
+                <Insets bottom="5.0" top="5.0"/>
+            </VBox.margin>
+        </Separator>
+        <Button fx:id="startBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                onAction="#openChampionsScene" text="Run champions"/>
+        <ProgressBar fx:id="progressBar" disable="true" prefWidth="200.0" progress="0.0">
+            <VBox.margin>
+                <Insets top="5.0"/>
+            </VBox.margin>
+        </ProgressBar>
+    </VBox>
 </AnchorPane>

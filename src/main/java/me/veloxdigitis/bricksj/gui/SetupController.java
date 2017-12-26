@@ -12,13 +12,9 @@ import me.veloxdigitis.bricksj.champions.Champions;
 import me.veloxdigitis.bricksj.champions.ChampionsListener;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.champions.SimpleGameSelector;
-import me.veloxdigitis.bricksj.config.InfoFileLoader;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.SimpleHTMLHistoryInfoParser;
-import me.veloxdigitis.bricksj.proxy.BricksAlgorithm;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class SetupController implements ChampionsListener {

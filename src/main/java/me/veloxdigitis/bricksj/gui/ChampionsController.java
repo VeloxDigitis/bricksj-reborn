@@ -31,7 +31,7 @@ public class ChampionsController implements ChangeListener<Number> {
     @FXML WebView infoView;
 
     private final List<BattleHistory> history;
-    private HistoryInfoParser parser;
+    private final HistoryInfoParser parser;
 
     public ChampionsController(List<BattleHistory> history, HistoryInfoParser parser) {
         this.history = history;

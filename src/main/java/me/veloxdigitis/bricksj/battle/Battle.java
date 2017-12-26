@@ -17,13 +17,13 @@ public class Battle implements Runnable{
 
     private final PlayersPair players;
 
-    private int mapSize;
-    private List<Brick> startingBricks;
-    private int initTime;
-    private int moveTime;
+    private final int mapSize;
+    private final List<Brick> startingBricks;
+    private final int initTime;
+    private final int moveTime;
     private boolean map[][];
 
-    private BattleHistory history;
+    private final BattleHistory history;
 
     private final List<BattleListener> listeners;
 
@@ -106,8 +106,8 @@ public class Battle implements Runnable{
         startingBricks.forEach(this::put);
 
         if(players.get().setMap(mapSize, startingBricks).getTime() > initTime)
-            return Optional.of(players.getOponent());
-        if(players.getOponent().setMap(mapSize, startingBricks).getTime() > initTime)
+            return Optional.of(players.getOpponent());
+        if(players.getOpponent().setMap(mapSize, startingBricks).getTime() > initTime)
             return Optional.of(players.get());
         return Optional.empty();
     }

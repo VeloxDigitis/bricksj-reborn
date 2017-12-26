@@ -7,7 +7,6 @@ import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
-import java.rmi.MarshalException;
 import java.util.List;
 import java.util.stream.Collectors;
 

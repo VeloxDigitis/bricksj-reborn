@@ -9,7 +9,7 @@ public class Brick {
     private final Slab[] slabs;
 
     public Brick(Slab a, Slab b) throws InvalidBrick {
-        if(!a.isNeighor(b))
+        if(!a.isNeighbor(b))
             throw new InvalidBrick();
 
         this.slabs = new Slab[]{a, b};
