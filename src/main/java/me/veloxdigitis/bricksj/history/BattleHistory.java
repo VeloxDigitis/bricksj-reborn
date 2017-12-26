@@ -11,12 +11,12 @@ import java.util.List;
 
 public class BattleHistory {
 
-    private final String name;
+    private final PlayersPair players;
     private final int mapSize;
     private final List<PlayerWithBrick> history;
 
-    public BattleHistory(String name, int mapSize) {
-        this.name = name;
+    public BattleHistory(PlayersPair players, int mapSize) {
+        this.players = players;
         this.mapSize = mapSize;
         this.history = new ArrayList<>();
     }
@@ -46,12 +46,12 @@ public class BattleHistory {
     }
 
     public PlayersPair getPlayers() {
-        return new PlayersPair(history.get(0).getPlayer(), history.get(1).getPlayer());
+        return players;
     }
 
     @Override
     public String toString() {
-        return name;
+        return players.toString();
     }
 
 }
