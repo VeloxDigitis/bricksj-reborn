@@ -15,6 +15,9 @@ import me.veloxdigitis.bricksj.champions.SimpleGameSelector;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.SimpleHTMLHistoryInfoParser;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
+import me.veloxdigitis.bricksj.logger.Logger;
+import me.veloxdigitis.bricksj.logger.LogsToFile;
+import me.veloxdigitis.bricksj.logger.StandardOutputLogs;
 
 import java.util.List;
 
@@ -30,6 +33,9 @@ public class SetupController implements ChampionsListener {
     @FXML private Button startBtn;
     @FXML private ProgressBar progressBar;
 
+    @FXML private CheckBox logToFile;
+    @FXML private CheckBox logToSout;
+
     @FXML
     public void initialize() {
         this.playersAmount.textProperty().bind(Bindings.size(players).asString().concat(" players"));
@@ -40,10 +46,14 @@ public class SetupController implements ChampionsListener {
         FXApplication.show("players", "Players", t -> new PlayersController(players));
     }
 
+    private LogsToFile fileLogger = new LogsToFile();
+
     @FXML
     public void openChampionsScene() {
         if(players.size() >= 2) {
             startBtn.setDisable(true);
+            if(logToFile.isSelected()) Logger.registerListener(fileLogger);
+            if(logToSout.isSelected()) Logger.registerListener(new StandardOutputLogs());
             new Thread(
                     new Champions(players,
                             mapSize.getValue(),
@@ -75,6 +85,7 @@ public class SetupController implements ChampionsListener {
         Platform.runLater(() -> {
             progressBar.setProgress(1.0);
             progressBar.getScene().getWindow().hide();
+            fileLogger.close();
             FXApplication.show("champions", "Judge",
                     t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser())).
                     setResizable(false);

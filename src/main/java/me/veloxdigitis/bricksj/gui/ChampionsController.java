@@ -90,7 +90,6 @@ public class ChampionsController implements ChangeListener<Number> {
     public void openLeaderboard() {
         Platform.runLater(() -> {
             FXApplication.show("leaderboard", "Leaderboard", t -> new LeaderboardController(leaderboard));
-            gameCanvas.getScene().getWindow().hide();
         });
     }
 

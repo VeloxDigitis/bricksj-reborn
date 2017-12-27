@@ -37,7 +37,7 @@ public class FXApplication extends Application {
         });
     }
 
-    public static Stage show(String name,  String title, Callback<Class<?>, Object> controllerFactory) {
+    public static Stage show(String name, String title, Callback<Class<?>, Object> controllerFactory) {
         Stage stage = new Stage();
         show(name, title, stage, controllerFactory);
         return stage;
