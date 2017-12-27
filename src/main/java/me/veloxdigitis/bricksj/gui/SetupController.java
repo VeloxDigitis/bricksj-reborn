@@ -46,23 +46,24 @@ public class SetupController implements ChampionsListener {
         FXApplication.show("players", "Players", t -> new PlayersController(players));
     }
 
-    private LogsToFile fileLogger = new LogsToFile();
-
     @FXML
     public void openChampionsScene() {
         if(players.size() >= 2) {
             startBtn.setDisable(true);
-            if(logToFile.isSelected()) Logger.registerListener(fileLogger);
+            logToSout.setDisable(true);
+            logToSout.setDisable(true);
+            if(logToFile.isSelected()) Logger.registerListener(new LogsToFile());
             if(logToSout.isSelected()) Logger.registerListener(new StandardOutputLogs());
-            new Thread(
+            Thread thread = new Thread(
                     new Champions(players,
                             mapSize.getValue(),
                             randomBricks.getValue(),
                             initTime.getValue(),
                             moveTime.getValue(),
                             new SimpleGameSelector(players),
-                            this)).
-                    start();
+                            this));
+            thread.setDaemon(true);
+            thread.start();
         } else
             new Alert(Alert.AlertType.NONE, "Please add at least 2 players", ButtonType.OK).show();
     }
@@ -85,7 +86,7 @@ public class SetupController implements ChampionsListener {
         Platform.runLater(() -> {
             progressBar.setProgress(1.0);
             progressBar.getScene().getWindow().hide();
-            fileLogger.close();
+            Logger.close();
             FXApplication.show("champions", "Judge",
                     t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser())).
                     setResizable(false);

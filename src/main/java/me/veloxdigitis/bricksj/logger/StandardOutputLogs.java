@@ -7,4 +7,9 @@ public class StandardOutputLogs implements LogListener {
         System.out.println(line);
     }
 
+    @Override
+    public void close() {
+        System.out.println("Finished logging");
+    }
+
 }

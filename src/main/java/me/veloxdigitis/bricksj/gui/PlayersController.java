@@ -64,8 +64,7 @@ public class PlayersController {
 
     private Optional<BricksAlgorithm> loadAlgorithm(Window window) {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Algorithm files (*.info)", "*.info"));
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Algorithm files (*.txt)", "*.txt"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Algorithm files (*.info)", "*.info", "*.txt"));
         chooser.setTitle("Choose algorithm");
 
         File file = chooser.showOpenDialog(window);

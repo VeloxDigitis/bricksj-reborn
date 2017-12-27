@@ -43,6 +43,7 @@ public class Champions implements Runnable {
                 try {
                     listener.game(game);
                     Thread thread = new Thread(game);
+                    thread.setDaemon(true);
                     thread.start();
                     thread.join();
                     history.add(game.getHistory());         //Save to history

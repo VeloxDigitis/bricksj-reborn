@@ -2,9 +2,11 @@ package me.veloxdigitis.bricksj.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import me.veloxdigitis.bricksj.logger.Logger;
 
@@ -14,6 +16,7 @@ public class FXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        primaryStage.setOnCloseRequest(event -> Platform.exit());
         show("setup", "Setup", primaryStage, null);
     }
 

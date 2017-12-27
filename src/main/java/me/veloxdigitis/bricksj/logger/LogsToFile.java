@@ -29,6 +29,7 @@ public class LogsToFile implements LogListener {
         writer.println(line);
     }
 
+    @Override
     public void close() {
         writer.close();
     }

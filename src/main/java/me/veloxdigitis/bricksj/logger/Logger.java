@@ -44,6 +44,10 @@ public class Logger {
         Logger.getInstance().listeners.add(listener);
     }
 
+    public static void close() {
+        Logger.getInstance().listeners.forEach(LogListener::close);
+    }
+
     private enum LogLevel {
         INFO, ERROR
     }
