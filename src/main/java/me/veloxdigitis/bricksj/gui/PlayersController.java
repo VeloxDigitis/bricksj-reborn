@@ -57,6 +57,11 @@ public class PlayersController {
         players.addAll(loadAlgorithms(Paths.get(System.getProperty("user.home"), "Desktop")));
     }
 
+    @FXML
+    private void removePlayer() {
+        players.remove(playersList.getSelectionModel().getSelectedItem());
+    }
+
     private Optional<BricksAlgorithm> loadAlgorithm(Window window) {
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Algorithm files (*.info)", "*.info"));

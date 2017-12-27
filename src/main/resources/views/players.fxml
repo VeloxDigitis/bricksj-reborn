@@ -27,7 +27,7 @@
             </rowConstraints>
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addPlayer" text="Add" />
             <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addDir" text="Dir" GridPane.columnIndex="1" />
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Remove" GridPane.columnIndex="2" />
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#removePlayer" text="Remove" GridPane.columnIndex="2" />
         </GridPane>
       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadDesktop" text="Load all from desktop" />
         <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hide" text="Done" />

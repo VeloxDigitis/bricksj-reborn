@@ -27,6 +27,7 @@ public class FXApplication extends Application {
 
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
+                stage.setResizable(false);
                 stage.setTitle(title);
                 stage.show();
             } catch (IOException e) {
