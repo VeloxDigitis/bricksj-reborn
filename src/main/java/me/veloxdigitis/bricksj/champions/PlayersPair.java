@@ -37,4 +37,8 @@ public class PlayersPair {
     public String toString() {
         return a + " vs " + b;
     }
+
+    public boolean contains(BrickPlayer player) {
+        return a == player || b == player;
+    }
 }

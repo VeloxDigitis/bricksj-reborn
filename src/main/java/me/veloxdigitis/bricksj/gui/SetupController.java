@@ -14,6 +14,7 @@ import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.champions.SimpleGameSelector;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.SimpleHTMLHistoryInfoParser;
+import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class SetupController implements ChampionsListener {
             progressBar.setProgress(1.0);
             progressBar.getScene().getWindow().hide();
             FXApplication.show("champions", "Judge",
-                    t -> new ChampionsController(history, new SimpleHTMLHistoryInfoParser())).
+                    t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser())).
                     setResizable(false);
         });
     }

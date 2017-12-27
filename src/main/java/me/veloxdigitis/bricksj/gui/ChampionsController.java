@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.HistoryInfoParser;
+import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,9 +33,11 @@ public class ChampionsController implements ChangeListener<Number> {
 
     private final List<BattleHistory> history;
     private final HistoryInfoParser parser;
+    private Leaderboard leaderboard;
 
-    public ChampionsController(List<BattleHistory> history, HistoryInfoParser parser) {
+    public ChampionsController(List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser) {
         this.history = history;
+        this.leaderboard = leaderboard;
         this.parser = parser;
     }
 
@@ -79,6 +82,14 @@ public class ChampionsController implements ChangeListener<Number> {
     public void newChampions() {
         Platform.runLater(() -> {
             FXApplication.show("setup", "Setup", null);
+            gameCanvas.getScene().getWindow().hide();
+        });
+    }
+
+    @FXML
+    public void openLeaderboard() {
+        Platform.runLater(() -> {
+            FXApplication.show("leaderboard", "Leaderboard", t -> new LeaderboardController(leaderboard));
             gameCanvas.getScene().getWindow().hide();
         });
     }

@@ -38,7 +38,7 @@
                <VBox spacing="5.0" BorderPane.alignment="CENTER">
                   <children>
                      <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#soloGame" text="Stress test all" />
-                     <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Show leaderboard" />
+                     <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openLeaderboard" text="Show leaderboard" />
                   </children>
                </VBox>
             </bottom>
