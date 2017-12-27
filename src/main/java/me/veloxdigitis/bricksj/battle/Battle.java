@@ -117,4 +117,9 @@ public class Battle implements Runnable{
                 forEach(s -> map[s.getX()][s.getY()] = true);
     }
 
+    @Override
+    public String toString() {
+        return players.toString();
+    }
+
 }

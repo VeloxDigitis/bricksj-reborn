@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -60,6 +62,12 @@ public class PlayersController {
     @FXML
     private void removePlayer() {
         players.remove(playersList.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    private void removePlayerFromKey(KeyEvent event) {
+        if(event.getCode() == KeyCode.DELETE)
+            removePlayer();
     }
 
     private Optional<BricksAlgorithm> loadAlgorithm(Window window) {

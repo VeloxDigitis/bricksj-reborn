@@ -32,6 +32,7 @@ public class SetupController implements ChampionsListener {
     @FXML private Label playersAmount;
     @FXML private Button startBtn;
     @FXML private ProgressBar progressBar;
+    @FXML private Label progressLabel;
 
     @FXML private CheckBox logToFile;
     @FXML private CheckBox logToSout;
@@ -78,7 +79,10 @@ public class SetupController implements ChampionsListener {
 
     @Override
     public void game(Battle game) {
-        Platform.runLater(() -> progressBar.setProgress(progressBar.getProgress() + (1.0 / gamesAmount)));
+        Platform.runLater(() -> {
+            progressLabel.setText(game.toString());
+            progressBar.setProgress(progressBar.getProgress() + (1.0 / gamesAmount));
+        });
     }
 
     @Override

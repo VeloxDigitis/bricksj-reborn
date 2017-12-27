@@ -14,7 +14,7 @@
     <VBox spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <Label fx:id="playersAmount" text="0 players" />
         <ScrollPane fitToWidth="true" vbarPolicy="NEVER">
-            <ListView fx:id="playersList" prefHeight="300.0" />
+            <ListView fx:id="playersList" onKeyPressed="#removePlayerFromKey" prefHeight="300.0" />
         </ScrollPane>
         <GridPane hgap="5.0">
             <columnConstraints>

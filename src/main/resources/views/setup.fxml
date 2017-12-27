@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.SetupController">
     <VBox prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -63,10 +65,17 @@
       <CheckBox fx:id="logToFile" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Log to file" />
       <CheckBox fx:id="logToSout" layoutX="10.0" layoutY="193.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Log to standard output" />
         <Button fx:id="startBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openChampionsScene" text="Run champions" />
-        <ProgressBar fx:id="progressBar" disable="true" maxWidth="1.7976931348623157E308" progress="0.0">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </ProgressBar>
+      <StackPane>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <children>
+              <ProgressBar fx:id="progressBar" disable="true" maxWidth="1.7976931348623157E308" progress="0.0" />
+            <Label fx:id="progressLabel">
+               <font>
+                  <Font size="11.0" />
+               </font></Label>
+         </children>
+      </StackPane>
     </VBox>
 </AnchorPane>
