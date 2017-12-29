@@ -18,6 +18,7 @@ import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChampionsController implements ChangeListener<Number> {
 
@@ -94,7 +95,18 @@ public class ChampionsController implements ChangeListener<Number> {
     }
 
     @FXML
-    public void soloGame() {
+    public void stressTestAll() {
+        Platform.runLater(() -> {
+            FXApplication.show("stresstest", "Stress Test", t ->
+                    new StressTestController(history.stream().flatMap(h -> h.getPlayers().toList().stream()).collect(Collectors.toList())));
+        });
+    }
 
+    @FXML
+    public void stressTest() {
+        Platform.runLater(() -> {
+            FXApplication.show("stresstest", "Stress Test", t ->
+                    new StressTestController(historyList.getSelectionModel().getSelectedItem().getPlayers().toList()));
+        });
     }
 }

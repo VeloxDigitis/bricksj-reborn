@@ -2,6 +2,8 @@ package me.veloxdigitis.bricksj.champions;
 
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class PlayersPair {
@@ -31,6 +33,10 @@ public class PlayersPair {
     public void perform(Consumer<BrickPlayer> consumer) {
         consumer.accept(a);
         consumer.accept(b);
+    }
+
+    public List<BrickPlayer> toList() {
+        return List.of(a, b);
     }
 
     @Override
