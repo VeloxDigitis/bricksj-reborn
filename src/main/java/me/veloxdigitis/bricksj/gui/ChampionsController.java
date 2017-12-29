@@ -35,8 +35,8 @@ public class ChampionsController implements ChangeListener<Number> {
 
     private final List<BattleHistory> history;
     private final HistoryInfoParser parser;
-    private int randomBricks;
-    private Leaderboard leaderboard;
+    private final int randomBricks;
+    private final Leaderboard leaderboard;
 
     public ChampionsController(List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser, int randomBricks) {
         this.history = history;
@@ -101,24 +101,18 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @FXML
     public void openLeaderboard() {
-        Platform.runLater(() -> {
-            FXApplication.show("leaderboard", "Leaderboard", t -> new LeaderboardController(leaderboard));
-        });
+        Platform.runLater(() -> FXApplication.show("leaderboard", "Leaderboard", t -> new LeaderboardController(leaderboard)));
     }
 
     @FXML
     public void stressTestAll() {
-        Platform.runLater(() -> {
-            FXApplication.show("stresstest", "Stress Test", t ->
-                    new StressTestController(history.stream().flatMap(h -> h.getPlayers().toList().stream()).collect(Collectors.toList())));
-        });
+        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", t ->
+                new StressTestController(history.stream().flatMap(h -> h.getPlayers().toList().stream()).collect(Collectors.toList()))));
     }
 
     @FXML
     public void stressTest() {
-        Platform.runLater(() -> {
-            FXApplication.show("stresstest", "Stress Test", t ->
-                    new StressTestController(historyList.getSelectionModel().getSelectedItem().getPlayers().toList()));
-        });
+        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", t ->
+                new StressTestController(historyList.getSelectionModel().getSelectedItem().getPlayers().toList())));
     }
 }

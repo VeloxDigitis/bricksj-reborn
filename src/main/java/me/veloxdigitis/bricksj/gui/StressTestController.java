@@ -20,7 +20,7 @@ public class StressTestController implements StressListener{
     @FXML private Button runBtn;
     @FXML private ProgressBar progressBar;
 
-    private List<BrickPlayer> players;
+    private final List<BrickPlayer> players;
 
     public StressTestController(List<BrickPlayer> players) {
         this.players = players;

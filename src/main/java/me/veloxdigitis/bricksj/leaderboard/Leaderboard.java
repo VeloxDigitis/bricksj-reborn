@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Leaderboard {
 
-    private List<Stats> players;
+    private final List<Stats> players;
 
     public Leaderboard(List<BattleHistory> history, List<BrickPlayer> players) {
         this.players = players.stream().map(p -> getPlayerStats(p, history)).collect(Collectors.toList());

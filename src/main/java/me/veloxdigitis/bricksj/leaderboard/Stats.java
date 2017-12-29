@@ -2,7 +2,7 @@ package me.veloxdigitis.bricksj.leaderboard;
 
 public class Stats {
 
-    private String playerName;
+    private final String playerName;
     private final double winRatio;
     private final long wins;
     private final long loses;

@@ -4,7 +4,7 @@ public enum StressLevel {
 
     LOW(99), MEDIUM(501), HIGH(999);
 
-    private int mapSize;
+    private final int mapSize;
 
     StressLevel(int mapSize) {
         this.mapSize = mapSize;

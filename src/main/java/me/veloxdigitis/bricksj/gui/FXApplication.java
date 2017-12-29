@@ -2,11 +2,9 @@ package me.veloxdigitis.bricksj.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import me.veloxdigitis.bricksj.logger.Logger;
 

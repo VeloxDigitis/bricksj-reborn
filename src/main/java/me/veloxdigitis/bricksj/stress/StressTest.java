@@ -11,10 +11,10 @@ import java.util.List;
 
 public class StressTest implements Runnable {
 
-    private List<BrickPlayer> players;
-    private int mapSize;
-    private int iterations;
-    private StressListener listener;
+    private final List<BrickPlayer> players;
+    private final int mapSize;
+    private final int iterations;
+    private final StressListener listener;
 
     public StressTest(List<BrickPlayer> players, int mapSize, int iterations, StressListener listener) {
         this.players = players;

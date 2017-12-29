@@ -4,7 +4,7 @@ import me.veloxdigitis.bricksj.battle.BrickPlayer;
 
 public class PlayerStressResult {
 
-    private BrickPlayer player;
+    private final BrickPlayer player;
     private int min = Integer.MAX_VALUE, max = 0;
 
     public PlayerStressResult(BrickPlayer player) {

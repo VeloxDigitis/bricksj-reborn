@@ -1,7 +1,5 @@
 package me.veloxdigitis.bricksj.map;
 
-import me.veloxdigitis.bricksj.logger.Logger;
-
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;

@@ -8,7 +8,7 @@ import me.veloxdigitis.bricksj.leaderboard.Stats;
 
 public class LeaderboardController {
 
-    private Leaderboard leaderboard;
+    private final Leaderboard leaderboard;
 
     @FXML private TableView<Stats> playersTable;
 

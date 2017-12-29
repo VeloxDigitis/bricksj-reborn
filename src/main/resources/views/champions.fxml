@@ -35,12 +35,12 @@
                </VBox>
             </top>
             <bottom>
-               <VBox spacing="5.0" BorderPane.alignment="CENTER">
-                  <children>
-                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTestAll" text="Stress test all" />
-                     <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openLeaderboard" text="Show leaderboard" />
-                  </children>
-               </VBox>
+                <VBox spacing="5.0" BorderPane.alignment="CENTER">
+                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTestAll"
+                            text="Stress test all"/>
+                    <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                            onAction="#openLeaderboard" text="Show leaderboard"/>
+                </VBox>
             </bottom>
             <padding>
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

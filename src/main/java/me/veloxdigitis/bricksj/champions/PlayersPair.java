@@ -2,7 +2,6 @@ package me.veloxdigitis.bricksj.champions;
 
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 

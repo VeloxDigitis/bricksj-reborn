@@ -4,10 +4,9 @@ import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.stats.Time;
+import org.apache.commons.io.IOUtils;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class SimpleHTMLHistoryInfoParser implements HistoryInfoParser {
 
@@ -15,7 +14,7 @@ public class SimpleHTMLHistoryInfoParser implements HistoryInfoParser {
 
     public SimpleHTMLHistoryInfoParser() {
         try {
-            this.HTML = new String(Files.readAllBytes(new File(getClass().getResource("/templates/info.html").getFile()).toPath()));
+            this.HTML = IOUtils.toString(getClass().getClassLoader().getResourceAsStream("templates/info.html"), "UTF-8");
         } catch (IOException e) {
             Logger.error("Couldn't load HTML template");
             this.HTML = "%title%<br />%winner%";
