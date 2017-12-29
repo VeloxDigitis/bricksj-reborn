@@ -40,6 +40,12 @@ public class SetupController implements ChampionsListener {
     @FXML
     public void initialize() {
         this.playersAmount.textProperty().bind(Bindings.size(players).asString().concat(" players"));
+        mapSize.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue % 2 != 1)
+                mapSize.getValueFactory().setValue(newValue + 1);
+            else
+                randomBricks.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, newValue / 2));
+        });
     }
 
     @FXML
