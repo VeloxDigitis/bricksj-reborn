@@ -34,7 +34,7 @@ public class Battle implements Runnable{
         this.initTime = initTime;
         this.moveTime = moveTime;
         this.listeners = listeners;
-        this.history = new BattleHistory(players, mapSize);
+        this.history = new BattleHistory(players, mapSize, startingBricks);
     }
 
     @Override

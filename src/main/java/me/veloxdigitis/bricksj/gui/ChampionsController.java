@@ -15,6 +15,7 @@ import javafx.scene.web.WebView;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.HistoryInfoParser;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
+import me.veloxdigitis.bricksj.map.Slab;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,12 +35,14 @@ public class ChampionsController implements ChangeListener<Number> {
 
     private final List<BattleHistory> history;
     private final HistoryInfoParser parser;
+    private int randomBricks;
     private Leaderboard leaderboard;
 
-    public ChampionsController(List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser) {
+    public ChampionsController(List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser, int randomBricks) {
         this.history = history;
         this.leaderboard = leaderboard;
         this.parser = parser;
+        this.randomBricks = randomBricks;
     }
 
     @FXML
@@ -50,6 +53,7 @@ public class ChampionsController implements ChangeListener<Number> {
         historyList.getSelectionModel().selectFirst();
         gameSlider.valueProperty().addListener(this);
         mapSizeLabel.setText(String.format("Map size %d", history.get(0).getMapSize()));
+        randomBricksLabel.setText(String.format("Random bricks %d", randomBricks));
     }
 
     private void replay(BattleHistory battle) {
@@ -59,6 +63,7 @@ public class ChampionsController implements ChangeListener<Number> {
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         currentGameLabel.setText(battle.toString());
+        changed(null, 0, 0);
         Platform.runLater(() -> infoView.getEngine().loadContent(parser.parse(battle)));
     }
 
@@ -69,14 +74,21 @@ public class ChampionsController implements ChangeListener<Number> {
         gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         BattleHistory battle = historyList.getSelectionModel().getSelectedItem();
         double slabSize = gameCanvas.getWidth() / battle.getMapSize();
+        gc.setFill(Color.WHITE);
+        battle.getStartingBricks().stream().flatMap(b -> Arrays.stream(b.getSlabs())).forEach(
+                slab -> fillSlab(gc, slab, slabSize)
+        );
         battle.getHistory().
                 stream().
                 limit(newValue.longValue()).
                 forEach(move -> {
                     gc.setFill(move.getPlayer().getColor());
-                    Arrays.stream(move.getSlabs()).forEach(slab ->
-                            gc.fillRect(slab.getX() * slabSize, slab.getY() * slabSize, slabSize, slabSize));
+                    Arrays.stream(move.getSlabs()).forEach(slab -> fillSlab(gc, slab, slabSize));
                 });
+    }
+
+    private void fillSlab(GraphicsContext gc, Slab slab, double slabSize) {
+        gc.fillRect(slab.getX() * slabSize, slab.getY() * slabSize, slabSize, slabSize);
     }
 
     @FXML

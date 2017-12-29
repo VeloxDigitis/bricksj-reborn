@@ -13,11 +13,13 @@ public class BattleHistory {
 
     private final PlayersPair players;
     private final int mapSize;
+    private final List<Brick> startingBricks;
     private final List<PlayerWithBrick> history;
 
-    public BattleHistory(PlayersPair players, int mapSize) {
+    public BattleHistory(PlayersPair players, int mapSize, List<Brick> startingBricks) {
         this.players = players;
         this.mapSize = mapSize;
+        this.startingBricks = startingBricks;
         this.history = new ArrayList<>();
     }
 
@@ -47,6 +49,10 @@ public class BattleHistory {
 
     public PlayersPair getPlayers() {
         return players;
+    }
+
+    public List<Brick> getStartingBricks() {
+        return startingBricks;
     }
 
     @Override

@@ -4,8 +4,10 @@ import me.veloxdigitis.bricksj.battle.Battle;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.logger.Logger;
+import me.veloxdigitis.bricksj.map.RandomBricks;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,7 +40,7 @@ public class Champions implements Runnable {
         listener.start(games);
         games.
             stream().
-            map(pair -> new Battle(pair, mapSize, new ArrayList<>(), initTime, moveTime, new ArrayList<>())).
+            map(pair -> new Battle(pair, mapSize, new RandomBricks(randomBricks, mapSize).getBricks(), initTime, moveTime, Collections.emptyList())).
             forEach(game -> {
                 try {
                     listener.game(game);

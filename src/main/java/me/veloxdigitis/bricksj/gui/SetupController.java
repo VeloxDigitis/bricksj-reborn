@@ -92,7 +92,7 @@ public class SetupController implements ChampionsListener {
             progressBar.getScene().getWindow().hide();
             Logger.close();
             FXApplication.show("champions", "Judge",
-                    t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser())).
+                    t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser(), randomBricks.getValue())).
                     setResizable(false);
         });
     }

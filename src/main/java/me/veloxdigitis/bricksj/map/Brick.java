@@ -39,9 +39,10 @@ public class Brick {
     public static Brick getRandom(int mapSize) {
         Slab main = new Slab(random.nextInt(mapSize), random.nextInt(mapSize));
         try {
-            return new Brick(main, random.nextBoolean() ?
-                    new Slab(main.getX() + (random.nextBoolean() ? 1 : -1), main.getY()) :
-                    new Slab(main.getX(), main.getY() + (random.nextBoolean() ? 1 : -1))
+            return new Brick(main,
+                    main.getX() > 0 ? (new Slab(main.getX() - 1, main.getY())) :
+                    main.getY() > 0 ? (new Slab(main.getX(), main.getY() - 1)) :
+                    new Slab(main.getX() + 1, main.getY())
             );
         } catch (InvalidBrick invalidBrick) {
             return null;
