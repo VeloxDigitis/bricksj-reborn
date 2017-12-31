@@ -44,7 +44,7 @@ public class SetupController implements ChampionsListener {
             if(newValue % 2 != 1)
                 mapSize.getValueFactory().setValue(newValue + 1);
             else
-                randomBricks.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, newValue / 2));
+                randomBricks.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, (int) (Math.pow(newValue, 2) / 2)));
         });
     }
 

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import me.veloxdigitis.bricksj.champions.Champions;
 import me.veloxdigitis.bricksj.logger.Logger;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class FXApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setOnCloseRequest(event -> Platform.exit());
+        primaryStage.setOnCloseRequest(event -> close());
         show("setup", "Setup", primaryStage, null);
     }
 
@@ -42,6 +43,16 @@ public class FXApplication extends Application {
         Stage stage = new Stage();
         show(name, title, stage, controllerFactory);
         return stage;
+    }
+
+    public static void close() {
+        Platform.exit();
+        try {
+            Logger.info("Closing all java applications");
+            Runtime.getRuntime().exec("TASKKILL /F /IM java.exe");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

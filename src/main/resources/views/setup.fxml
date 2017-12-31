@@ -41,7 +41,7 @@
             </Spinner>
             <Spinner fx:id="randomBricks" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <valueFactory>
-                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="5" max="10" min="0" />
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="5" max="4900" min="0" />
                 </valueFactory>
             </Spinner>
             <Spinner fx:id="initTime" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="2">

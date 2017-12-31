@@ -26,6 +26,7 @@ public class ChampionsController implements ChangeListener<Number> {
     @FXML ListView<BattleHistory> historyList;
     @FXML Slider gameSlider;
     @FXML Canvas gameCanvas;
+    @FXML Label moveLabel;
 
     @FXML Label mapSizeLabel;
     @FXML Label randomBricksLabel;
@@ -69,15 +70,21 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @Override
     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+        moveLabel.textProperty().setValue("" + newValue.intValue());
+        BattleHistory battle = historyList.getSelectionModel().getSelectedItem();
+
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
-        BattleHistory battle = historyList.getSelectionModel().getSelectedItem();
+
         double slabSize = gameCanvas.getWidth() / battle.getMapSize();
+
         gc.setFill(Color.WHITE);
         battle.getStartingBricks().stream().flatMap(b -> Arrays.stream(b.getSlabs())).forEach(
                 slab -> fillSlab(gc, slab, slabSize)
         );
+
         battle.getHistory().
                 stream().
                 limit(newValue.longValue()).
@@ -115,4 +122,9 @@ public class ChampionsController implements ChangeListener<Number> {
         Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", t ->
                 new StressTestController(historyList.getSelectionModel().getSelectedItem().getPlayers().toList())));
     }
+
+    @FXML
+    public void play() {
+    }
+
 }
