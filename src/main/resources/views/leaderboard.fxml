@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
-    <TableView fx:id="playersTable" editable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <columns>
-          <TableColumn prefWidth="250.0" text="Name">
-              <cellValueFactory>
-                  <PropertyValueFactory property="playerName"/>
-              </cellValueFactory>
-          </TableColumn>
-          <TableColumn minWidth="0.0" prefWidth="50.0" text="W/L">
-              <cellValueFactory>
-                  <PropertyValueFactory property="winRatio"/>
-              </cellValueFactory>
-          </TableColumn>
-          <TableColumn prefWidth="50.0" text="Wins">
-              <cellValueFactory>
-                  <PropertyValueFactory property="wins"/>
-              </cellValueFactory>
-          </TableColumn>
-          <TableColumn prefWidth="50.0" text="Loses">
-              <cellValueFactory>
-                  <PropertyValueFactory property="loses"/>
-              </cellValueFactory>
-          </TableColumn>
-      </columns>
-    </TableView>
-</AnchorPane>
+<TabPane prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
+     <tabs>
+       <Tab text="Table View">
+         <content>
+             <TableView fx:id="playersTable" editable="true">
+                 <columns>
+                     <TableColumn prefWidth="250.0" text="Name">
+                         <cellValueFactory>
+                             <PropertyValueFactory property="playerName" />
+                         </cellValueFactory>
+                     </TableColumn>
+                     <TableColumn minWidth="0.0" prefWidth="50.0" text="W/L">
+                         <cellValueFactory>
+                             <PropertyValueFactory property="winRatio" />
+                         </cellValueFactory>
+                     </TableColumn>
+                     <TableColumn prefWidth="50.0" text="Wins">
+                         <cellValueFactory>
+                             <PropertyValueFactory property="wins" />
+                         </cellValueFactory>
+                     </TableColumn>
+                     <TableColumn prefWidth="50.0" text="Loses">
+                         <cellValueFactory>
+                             <PropertyValueFactory property="loses" />
+                         </cellValueFactory>
+                     </TableColumn>
+                 </columns>
+             </TableView>
+         </content>
+       </Tab>
+       <Tab text="Charts View">
+         <content>
+             <BarChart fx:id="bc" prefHeight="400.0" prefWidth="600.0">
+                 <xAxis>
+                     <CategoryAxis fx:id="alghName" label="Name" side="BOTTOM" />
+                 </xAxis>
+                 <yAxis>
+                     <NumberAxis fx:id="wins" label="Wins" side="LEFT" />
+                 </yAxis>
+             </BarChart>
+         </content>
+       </Tab>
+     </tabs>
+   </TabPane>
