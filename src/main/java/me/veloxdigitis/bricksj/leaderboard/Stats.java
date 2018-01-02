@@ -1,21 +1,23 @@
 package me.veloxdigitis.bricksj.leaderboard;
 
+import me.veloxdigitis.bricksj.battle.BrickPlayer;
+
 public class Stats {
 
-    private final String playerName;
+    private final BrickPlayer player;
     private final double winRatio;
     private final long wins;
     private final long loses;
 
-    public Stats(String playerName, double winRatio, long wins, long loses) {
-        this.playerName = playerName;
+    public Stats(BrickPlayer player, double winRatio, long wins, long loses) {
+        this.player = player;
         this.winRatio = winRatio;
         this.wins = wins;
         this.loses = loses;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public BrickPlayer getPlayer() {
+        return player;
     }
 
     public double getWinRatio() {

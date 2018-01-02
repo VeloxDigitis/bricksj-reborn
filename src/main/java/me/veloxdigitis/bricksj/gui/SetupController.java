@@ -57,7 +57,7 @@ public class SetupController implements ChampionsListener {
     public void openChampionsScene() {
         if(players.size() >= 2) {
             startBtn.setDisable(true);
-            logToSout.setDisable(true);
+            logToFile.setDisable(true);
             logToSout.setDisable(true);
             if(logToFile.isSelected()) Logger.registerListener(new LogsToFile());
             if(logToSout.isSelected()) Logger.registerListener(new StandardOutputLogs());

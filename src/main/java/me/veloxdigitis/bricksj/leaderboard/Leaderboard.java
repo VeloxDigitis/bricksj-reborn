@@ -21,7 +21,7 @@ public class Leaderboard {
         long games = playerGames.size();
         long wins = playerGames.stream().filter(b -> b.getWinner() == player).count();
         long loses = games - wins;
-        return new Stats(player.toString(), wins / (double)games, wins, loses);
+        return new Stats(player, wins / (double)games, wins, loses);
     }
 
     public List<Stats> getPlayersWithStats() {

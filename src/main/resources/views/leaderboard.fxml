@@ -17,7 +17,7 @@
                  <columns>
                      <TableColumn prefWidth="250.0" text="Name">
                          <cellValueFactory>
-                             <PropertyValueFactory property="playerName" />
+                             <PropertyValueFactory property="player" />
                          </cellValueFactory>
                      </TableColumn>
                      <TableColumn minWidth="0.0" prefWidth="50.0" text="W/L">
@@ -41,9 +41,9 @@
        </Tab>
        <Tab text="Charts View">
          <content>
-             <BarChart fx:id="bc" prefHeight="400.0" prefWidth="600.0">
+             <BarChart fx:id="bc" barGap="5.0" categoryGap="0.0" legendVisible="false">
                  <xAxis>
-                     <CategoryAxis fx:id="alghName" label="Name" side="BOTTOM" />
+                     <CategoryAxis label="Name" side="BOTTOM" />
                  </xAxis>
                  <yAxis>
                      <NumberAxis fx:id="wins" label="Wins" side="LEFT" />
