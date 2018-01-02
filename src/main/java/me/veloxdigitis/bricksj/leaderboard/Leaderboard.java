@@ -2,6 +2,7 @@ package me.veloxdigitis.bricksj.leaderboard;
 
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
+import me.veloxdigitis.bricksj.stats.Time;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,10 @@ public class Leaderboard {
         long games = playerGames.size();
         long wins = playerGames.stream().filter(b -> b.getWinner() == player).count();
         long loses = games - wins;
-        return new Stats(player, wins / (double)games, wins, loses);
+
+        int max = playerGames.stream().map(Time::new).mapToInt(t -> t.getMax(player)).max().orElse(-1);
+
+        return new Stats(player, wins / (double)games, wins, loses, max);
     }
 
     public List<Stats> getPlayersWithStats() {

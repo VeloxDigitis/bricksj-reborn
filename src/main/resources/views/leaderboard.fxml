@@ -9,18 +9,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<TabPane prefHeight="400.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
+<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
      <tabs>
        <Tab text="Table View">
          <content>
              <TableView fx:id="playersTable" editable="true">
                  <columns>
-                     <TableColumn prefWidth="250.0" text="Name">
+                     <TableColumn prefWidth="340.0" text="Name">
                          <cellValueFactory>
                              <PropertyValueFactory property="player" />
                          </cellValueFactory>
                      </TableColumn>
-                     <TableColumn minWidth="0.0" prefWidth="50.0" text="W/L">
+                     <TableColumn minWidth="0.0" prefWidth="75.0" text="W/L">
                          <cellValueFactory>
                              <PropertyValueFactory property="winRatio" />
                          </cellValueFactory>
@@ -30,11 +30,16 @@
                              <PropertyValueFactory property="wins" />
                          </cellValueFactory>
                      </TableColumn>
-                     <TableColumn prefWidth="50.0" text="Loses">
+                     <TableColumn prefWidth="59.0" text="Loses">
                          <cellValueFactory>
                              <PropertyValueFactory property="loses" />
                          </cellValueFactory>
                      </TableColumn>
+                  <TableColumn prefWidth="75.0" text="Max time">
+                     <cellValueFactory>
+                         <PropertyValueFactory property="maxTime" />
+                     </cellValueFactory>
+                  </TableColumn>
                  </columns>
              </TableView>
          </content>

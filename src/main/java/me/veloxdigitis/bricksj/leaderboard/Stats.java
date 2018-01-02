@@ -8,12 +8,14 @@ public class Stats {
     private final double winRatio;
     private final long wins;
     private final long loses;
+    private int maxTime;
 
-    public Stats(BrickPlayer player, double winRatio, long wins, long loses) {
+    public Stats(BrickPlayer player, double winRatio, long wins, long loses, int maxTime) {
         this.player = player;
         this.winRatio = winRatio;
         this.wins = wins;
         this.loses = loses;
+        this.maxTime = maxTime;
     }
 
     public BrickPlayer getPlayer() {
@@ -31,4 +33,9 @@ public class Stats {
     public long getLoses() {
         return loses;
     }
+
+    public int getMaxTime() {
+        return maxTime;
+    }
+
 }

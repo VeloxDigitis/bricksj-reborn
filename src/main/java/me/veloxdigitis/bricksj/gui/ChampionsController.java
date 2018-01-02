@@ -4,12 +4,16 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import me.veloxdigitis.bricksj.history.BattleHistory;
@@ -23,6 +27,7 @@ import java.util.stream.Collectors;
 
 public class ChampionsController implements ChangeListener<Number> {
 
+    @FXML TextField search;
     @FXML ListView<BattleHistory> historyList;
     @FXML Slider gameSlider;
     @FXML Canvas gameCanvas;
@@ -48,9 +53,18 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @FXML
     public void initialize() {
-        historyList.setItems(FXCollections.observableArrayList(history));
         historyList.getSelectionModel().selectedItemProperty().
                 addListener((ObservableValue<? extends BattleHistory> observable, BattleHistory oldValue, BattleHistory newValue) -> replay(newValue));
+        FilteredList<BattleHistory> filteredData = new FilteredList<>(FXCollections.observableArrayList(history), p -> true);
+        search.textProperty().addListener((observable, oldValue, newValue) ->
+            filteredData.setPredicate(history -> {
+                if (newValue == null || newValue.isEmpty()) return true;
+                return history.toString().toLowerCase().contains(newValue.toLowerCase());
+            })
+        );
+        SortedList<BattleHistory> sortedData = new SortedList<>(filteredData);
+        historyList.setItems(sortedData);
+
         historyList.getSelectionModel().selectFirst();
         gameSlider.valueProperty().addListener(this);
         mapSizeLabel.setText(String.format("Map size %d", history.get(0).getMapSize()));
@@ -58,6 +72,8 @@ public class ChampionsController implements ChangeListener<Number> {
     }
 
     private void replay(BattleHistory battle) {
+        if(battle == null) return;
+
         gameSlider.adjustValue(0.0);
         gameSlider.setMax(battle.length());
         gameSlider.setMajorTickUnit(gameSlider.getMax() / 10);
@@ -70,6 +86,7 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @Override
     public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        if(historyList.getSelectionModel().getSelectedItem() == null) return;
 
         moveLabel.textProperty().setValue("" + newValue.intValue());
         BattleHistory battle = historyList.getSelectionModel().getSelectedItem();

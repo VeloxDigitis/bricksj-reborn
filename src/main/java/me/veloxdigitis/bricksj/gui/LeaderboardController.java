@@ -37,7 +37,8 @@ public class LeaderboardController {
     private void setChartBar() {
         wins.setTickLabelFormatter(new ChartStringConverter());
         wins.setMinorTickCount(0);
-        wins.setTickUnit(1);
+        wins.setTickUnit(1.0);
+        wins.setForceZeroInRange(true);
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         leaderboard.getPlayersWithStats().forEach(
