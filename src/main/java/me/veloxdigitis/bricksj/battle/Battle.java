@@ -26,6 +26,7 @@ public class Battle implements Runnable{
     private final BattleHistory history;
 
     private final List<BattleListener> listeners;
+    private BrickPlayer winner;
 
     public Battle(PlayersPair players, int mapSize, List<Brick> startingBricks, int initTime, int moveTime, List<BattleListener> listeners) {
         this.players = players;
@@ -39,11 +40,11 @@ public class Battle implements Runnable{
 
     @Override
     public void run() {
+        PlayersPair players = this.players;
+
         Optional<BrickPlayer> mapPlayer = initMap();
         if(mapPlayer.isPresent()) {
-            if(players.get() != mapPlayer.get())
-                players.swap();
-            end(BattleEndReason.OUT_OF_TIME);
+            end(BattleEndReason.OUT_OF_TIME, winner);
             return;
         }
 
@@ -53,7 +54,7 @@ public class Battle implements Runnable{
         while(validator.anyMove()) {
             BrickMove move = move(players.get(), lastMove, validator);
             history.addToHistory(move.getBrick(), players.get(), move.getTime());
-            players.swap();
+            players = players.swap();
             if(move.getMove() == BattleEndReason.VALID) {
                 lastMove = move.getBrick();
                 if(validator.isValid(lastMove)) {
@@ -62,23 +63,24 @@ public class Battle implements Runnable{
                     invokeListeners(l -> l.placed(finalLastMove));
                 }
             } else {
-                end(move.getMove());
+                end(move.getMove(), players.getOpponent());
                 return;
             }
         }
 
-        end(BattleEndReason.NO_MOVES);
+        end(BattleEndReason.NO_MOVES, players.getOpponent());
     }
 
     public BrickPlayer getWinner() {
-        return players.get();
+        return winner;
     }
 
     public BattleHistory getHistory() {
         return history;
     }
 
-    private void end(BattleEndReason reason) {
+    private void end(BattleEndReason reason, BrickPlayer winner) {
+        this.winner = winner;
         players.perform(BrickPlayer::endGame);
         invokeListeners(l -> l.end(players.get(), reason));
     }

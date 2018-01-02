@@ -23,10 +23,8 @@ public class PlayersPair {
         return b;
     }
 
-    public void swap() {
-        BrickPlayer temp = a;
-        this.a = b;
-        this.b = temp;
+    public PlayersPair swap() {
+        return new PlayersPair(b, a);
     }
 
     public void perform(Consumer<BrickPlayer> consumer) {
