@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.history;
 
+import me.veloxdigitis.bricksj.battle.BattleEndReason;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.logger.Logger;
@@ -15,6 +16,7 @@ public class BattleHistory {
     private final int mapSize;
     private final List<Brick> startingBricks;
     private final List<PlayerWithBrick> history;
+    private BattleEndReason reason = BattleEndReason.UNKNOWN;
 
     public BattleHistory(PlayersPair players, int mapSize, List<Brick> startingBricks) {
         this.players = players;
@@ -55,9 +57,16 @@ public class BattleHistory {
         return startingBricks;
     }
 
+    public void end(BattleEndReason reason) {
+        this.reason = reason;
+    }
+
+    public BattleEndReason getReason() {
+        return reason;
+    }
+
     @Override
     public String toString() {
         return players.toString();
     }
-
 }

@@ -13,7 +13,7 @@ public class BrickMove {
     }
 
     public BrickMove(Brick brick, int time) {
-        this(BattleEndReason.VALID);
+        this(BattleEndReason.UNKNOWN);
         this.brick = brick;
         this.time = time;
     }

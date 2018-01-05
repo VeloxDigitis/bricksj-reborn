@@ -55,7 +55,7 @@ public class Battle implements Runnable{
             BrickMove move = move(players.get(), lastMove, validator);
             history.addToHistory(move.getBrick(), players.get(), move.getTime());
             players = players.swap();
-            if(move.getMove() == BattleEndReason.VALID) {
+            if(move.getMove() == BattleEndReason.UNKNOWN) {
                 lastMove = move.getBrick();
                 if(validator.isValid(lastMove)) {
                     put(lastMove);
@@ -81,6 +81,7 @@ public class Battle implements Runnable{
 
     private void end(BattleEndReason reason, BrickPlayer winner) {
         this.winner = winner;
+        history.end(reason);
         players.perform(BrickPlayer::endGame);
         invokeListeners(l -> l.end(players.get(), reason));
     }
