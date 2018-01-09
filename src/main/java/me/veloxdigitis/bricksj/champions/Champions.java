@@ -1,8 +1,10 @@
 package me.veloxdigitis.bricksj.champions;
 
+import me.veloxdigitis.bricksj.Speaker;
 import me.veloxdigitis.bricksj.battle.Battle;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
+import me.veloxdigitis.bricksj.logger.BricksLogger;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.RandomBricks;
 
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Champions implements Runnable {
+public class Champions extends Speaker<ChampionsListener> implements Runnable {
 
     private final Map<BrickPlayer, Points> players;
     private final int mapSize;
@@ -20,30 +22,32 @@ public class Champions implements Runnable {
     private final int initTime;
     private final int moveTime;
     private final GameSelector selector;
-    private final ChampionsListener listener;
 
     private final List<BattleHistory> history = new ArrayList<>();
 
-    public Champions(List<BrickPlayer> players, int mapSize, int randomBricks, int initTime, int moveTime, GameSelector selector, ChampionsListener listener) {
+    public Champions(List<BrickPlayer> players, int mapSize, int randomBricks, int initTime, int moveTime, GameSelector selector, List<ChampionsListener> listeners) {
+        super(listeners);
         this.players = players.stream().collect(Collectors.toMap(p -> p, p -> new Points(0)));
         this.mapSize = mapSize;
         this.randomBricks = randomBricks;
         this.initTime = initTime;
         this.moveTime = moveTime;
         this.selector = selector;
-        this.listener = listener;
     }
 
     @Override
     public void run() {
         List<PlayersPair> games = selector.getGames();
-        listener.start(games);
+        invokeListeners(l -> l.start(games));
         games.
             stream().
-            map(pair -> new Battle(pair, mapSize, new RandomBricks(randomBricks, mapSize).getBricks(), initTime, moveTime, Collections.emptyList())).
+            map(pair -> new Battle(pair, mapSize,
+                    new RandomBricks(randomBricks, mapSize).getBricks(),
+                    initTime, moveTime,
+                    Collections.singletonList(BricksLogger.getInstance()))).
             forEach(game -> {
                 try {
-                    listener.game(game);
+                    invokeListeners(l -> l.game(game));
                     Thread thread = new Thread(game);
                     thread.setDaemon(true);
                     thread.start();
@@ -54,7 +58,9 @@ public class Champions implements Runnable {
                     Logger.error("Interrupt exception");
                 }
             });
-        listener.end(history);
+        invokeListeners(l -> l.end(history));
     }
+
+
 
 }

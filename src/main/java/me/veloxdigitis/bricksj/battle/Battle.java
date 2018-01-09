@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.battle;
 
+import me.veloxdigitis.bricksj.Speaker;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.map.Brick;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class Battle implements Runnable{
+public class Battle extends Speaker<BattleListener> implements Runnable{
 
     private final PlayersPair players;
 
@@ -25,16 +26,15 @@ public class Battle implements Runnable{
 
     private final BattleHistory history;
 
-    private final List<BattleListener> listeners;
     private BrickPlayer winner;
 
     public Battle(PlayersPair players, int mapSize, List<Brick> startingBricks, int initTime, int moveTime, List<BattleListener> listeners) {
+        super(listeners);
         this.players = players;
         this.mapSize = mapSize;
         this.startingBricks = startingBricks;
         this.initTime = initTime;
         this.moveTime = moveTime;
-        this.listeners = listeners;
         this.history = new BattleHistory(players, mapSize, startingBricks);
     }
 
@@ -86,9 +86,7 @@ public class Battle implements Runnable{
         invokeListeners(l -> l.end(players.get(), reason));
     }
 
-    private void invokeListeners(Consumer<BattleListener> consumer) {
-        listeners.forEach(consumer);
-    }
+
 
     private BrickMove move(BrickPlayer player, Brick lastMove, MapValidator validator) {
         try {

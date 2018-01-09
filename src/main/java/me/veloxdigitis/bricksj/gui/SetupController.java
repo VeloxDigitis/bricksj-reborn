@@ -15,10 +15,13 @@ import me.veloxdigitis.bricksj.champions.SimpleGameSelector;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.SimpleHTMLHistoryInfoParser;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
+import me.veloxdigitis.bricksj.logger.BricksLogger;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.logger.LogsToFile;
 import me.veloxdigitis.bricksj.logger.StandardOutputLogs;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SetupController implements ChampionsListener {
@@ -68,7 +71,7 @@ public class SetupController implements ChampionsListener {
                             initTime.getValue(),
                             moveTime.getValue(),
                             new SimpleGameSelector(players),
-                            this));
+                            Arrays.asList(this, BricksLogger.getInstance())));
             thread.setDaemon(true);
             thread.start();
         } else

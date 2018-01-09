@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.proxy;
 
+import com.oracle.tools.packager.Log;
 import me.veloxdigitis.bricksj.logger.Logger;
 
 import java.io.*;
@@ -22,6 +23,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
     @Override
     public void run() {
         try {
+            Logger.info("Starting " + getName());
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/C", runCommand);
             processBuilder.directory(rootPath.toFile());
             this.process = processBuilder.start();
@@ -35,6 +37,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
     @Override
     public void terminate() {
         try {
+            Logger.info("Killing " + getName());
             Runtime.getRuntime().exec("taskkill /F /pid " + process.pid());
             process.destroy();
             reader.close();
@@ -46,7 +49,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
 
     public void send(String message) {
         try {
-            Logger.info("Sending " + message + " to " + getName());
+            Logger.info(String.format("%s <- %s", getName(), message));
             writer.write(message + "\n");
             writer.flush();
         } catch (IOException e) {
@@ -55,9 +58,10 @@ public abstract class StandardIOAlgorithm implements Algorithm {
     }
 
     public String read() {
-
         try {
-            return reader.readLine().toLowerCase();
+            String result = reader.readLine().toLowerCase();
+            Logger.info(String.format("%s -> %s", getName(), result));
+            return result;
         } catch (IOException e) {
             Logger.error("Couldn't communicate with algorithm");
             return "";
