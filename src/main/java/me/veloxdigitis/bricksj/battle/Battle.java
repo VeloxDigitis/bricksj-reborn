@@ -53,9 +53,9 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
         while(validator.anyMove()) {
             BrickMove move = move(players.get(), lastMove, validator);
-            history.addToHistory(move.getBrick(), players.get(), move.getTime());
-            players = players.swap();
             if(move.getMove() == BattleEndReason.UNKNOWN) {
+                history.addToHistory(move.getBrick(), players.get(), move.getTime());
+                players = players.swap();
                 lastMove = move.getBrick();
                 if(validator.isValid(lastMove)) {
                     put(lastMove);
