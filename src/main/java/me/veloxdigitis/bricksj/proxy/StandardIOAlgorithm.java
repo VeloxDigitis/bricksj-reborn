@@ -1,6 +1,5 @@
 package me.veloxdigitis.bricksj.proxy;
 
-import com.oracle.tools.packager.Log;
 import me.veloxdigitis.bricksj.logger.Logger;
 
 import java.io.*;
@@ -57,15 +56,12 @@ public abstract class StandardIOAlgorithm implements Algorithm {
         }
     }
 
-    public String read() {
-        try {
-            String result = reader.readLine().toLowerCase();
-            Logger.info(String.format("%s -> %s", getName(), result));
-            return result;
-        } catch (IOException e) {
-            Logger.error("Couldn't communicate with algorithm");
-            return "";
-        }
+    public String read() throws IOException {
+        String result = reader.readLine();
+        if(result == null)
+            throw new IOException("Can't read");
+        Logger.info(String.format("%s -> %s", getName(), result.toLowerCase()));
+        return result;
     }
 
 }

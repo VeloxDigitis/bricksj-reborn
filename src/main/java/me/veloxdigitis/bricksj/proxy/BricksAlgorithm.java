@@ -7,6 +7,7 @@ import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,11 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
                             collect(Collectors.joining("_")));
         TimedOperation<Boolean> time = new TimedOperation<>();
         send(message.toString());
-        return time.setDataAndStop(read().equals("ok"));
+        try {
+            return time.setDataAndStop(read().equals("ok"));
+        } catch (IOException e) {
+            return time.setDataAndStop(false);
+        }
     }
 
     @Override
@@ -69,6 +74,11 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
     private TimedOperation<Brick> move(String message) throws InvalidBrick {
         TimedOperation<Brick> time = new TimedOperation<>();
         send(message);
-        return time.setDataAndStop(Brick.fromString(read()));
+        try {
+            return time.setDataAndStop(Brick.fromString(read()));
+        } catch (IOException e) {
+            time.setDataAndStop(null);
+            throw new InvalidBrick();
+        }
     }
 }

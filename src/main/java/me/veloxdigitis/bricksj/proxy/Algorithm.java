@@ -1,5 +1,7 @@
 package me.veloxdigitis.bricksj.proxy;
 
+import java.io.IOException;
+
 public interface Algorithm {
 
     String getName();
@@ -8,6 +10,6 @@ public interface Algorithm {
     void terminate();
 
     void send(String message);
-    String read();
+    String read() throws IOException;
 
 }
