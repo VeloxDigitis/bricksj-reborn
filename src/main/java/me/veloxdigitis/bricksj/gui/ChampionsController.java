@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
@@ -57,10 +56,10 @@ public class ChampionsController implements ChangeListener<Number> {
                 addListener((ObservableValue<? extends BattleHistory> observable, BattleHistory oldValue, BattleHistory newValue) -> replay(newValue));
         FilteredList<BattleHistory> filteredData = new FilteredList<>(FXCollections.observableArrayList(history), p -> true);
         search.textProperty().addListener((observable, oldValue, newValue) ->
-            filteredData.setPredicate(history -> {
-                if (newValue == null || newValue.isEmpty()) return true;
-                return history.toString().toLowerCase().contains(newValue.toLowerCase());
-            })
+            filteredData.setPredicate(
+                    history -> newValue == null
+                            || newValue.isEmpty()
+                            || history.toString().toLowerCase().contains(newValue.toLowerCase()))
         );
         SortedList<BattleHistory> sortedData = new SortedList<>(filteredData);
         historyList.setItems(sortedData);

@@ -12,7 +12,6 @@ import me.veloxdigitis.bricksj.timer.TimedOperation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class Battle extends Speaker<BattleListener> implements Runnable{
 

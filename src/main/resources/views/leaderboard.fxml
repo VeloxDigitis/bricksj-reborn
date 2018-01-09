@@ -9,52 +9,47 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
-     <tabs>
-       <Tab text="Table View">
-         <content>
-             <TableView fx:id="playersTable" editable="true">
-                 <columns>
-                     <TableColumn prefWidth="340.0" text="Name">
-                         <cellValueFactory>
-                             <PropertyValueFactory property="player" />
-                         </cellValueFactory>
-                     </TableColumn>
-                     <TableColumn minWidth="0.0" prefWidth="75.0" text="W/L">
-                         <cellValueFactory>
-                             <PropertyValueFactory property="winRatio" />
-                         </cellValueFactory>
-                     </TableColumn>
-                     <TableColumn prefWidth="50.0" text="Wins">
-                         <cellValueFactory>
-                             <PropertyValueFactory property="wins" />
-                         </cellValueFactory>
-                     </TableColumn>
-                     <TableColumn prefWidth="59.0" text="Loses">
-                         <cellValueFactory>
-                             <PropertyValueFactory property="loses" />
-                         </cellValueFactory>
-                     </TableColumn>
-                  <TableColumn prefWidth="75.0" text="Max time">
-                     <cellValueFactory>
-                         <PropertyValueFactory property="maxTime" />
-                     </cellValueFactory>
-                  </TableColumn>
-                 </columns>
-             </TableView>
-         </content>
-       </Tab>
-       <Tab text="Charts View">
-         <content>
-             <BarChart fx:id="bc" barGap="5.0" categoryGap="0.0" legendVisible="false">
-                 <xAxis>
-                     <CategoryAxis label="Name" side="BOTTOM" />
-                 </xAxis>
-                 <yAxis>
-                     <NumberAxis fx:id="wins" label="Wins" side="LEFT" />
-                 </yAxis>
-             </BarChart>
-         </content>
-       </Tab>
-     </tabs>
-   </TabPane>
+<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
+    <Tab text="Table View">
+        <TableView fx:id="playersTable" editable="true">
+            <columns>
+                <TableColumn prefWidth="340.0" text="Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="player"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="75.0" text="W/L">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="winRatio"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="50.0" text="Wins">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="wins"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="59.0" text="Loses">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="loses"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="75.0" text="Max time">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="maxTime"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </Tab>
+    <Tab text="Charts View">
+        <BarChart fx:id="bc" barGap="5.0" categoryGap="0.0" legendVisible="false">
+            <xAxis>
+                <CategoryAxis label="Name" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="wins" label="Wins" side="LEFT"/>
+            </yAxis>
+        </BarChart>
+    </Tab>
+</TabPane>

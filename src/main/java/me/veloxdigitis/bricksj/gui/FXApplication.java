@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import me.veloxdigitis.bricksj.champions.Champions;
 import me.veloxdigitis.bricksj.logger.Logger;
 
 import java.io.IOException;

@@ -21,7 +21,6 @@ import me.veloxdigitis.bricksj.logger.LogsToFile;
 import me.veloxdigitis.bricksj.logger.StandardOutputLogs;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class SetupController implements ChampionsListener {

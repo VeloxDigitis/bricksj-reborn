@@ -21,15 +21,13 @@
       <left>
          <BorderPane prefWidth="240.0" BorderPane.alignment="CENTER">
             <center>
-               <VBox spacing="2.0" BorderPane.alignment="CENTER">
-                  <BorderPane.margin>
-                     <Insets bottom="5.0" top="5.0" />
-                  </BorderPane.margin>
-                  <children>
-                     <TextField fx:id="search" />
-                     <ListView fx:id="historyList" />
-                  </children>
-               </VBox>
+                <VBox spacing="2.0" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets bottom="5.0" top="5.0"/>
+                    </BorderPane.margin>
+                    <TextField fx:id="search"/>
+                    <ListView fx:id="historyList"/>
+                </VBox>
             </center>
             <top>
                <VBox spacing="5.0" BorderPane.alignment="CENTER">
@@ -61,12 +59,10 @@
                </Label>
                <Canvas fx:id="gameCanvas" height="400.0" width="400.0" />
                <Slider fx:id="gameSlider" blockIncrement="1.0" majorTickUnit="500.0" max="5000.0" showTickMarks="true" value="1.0" />
-               <HBox alignment="CENTER" spacing="15.0">
-                  <children>
-                     <Button mnemonicParsing="false" onAction="#play" text="Play" />
-                     <Label fx:id="moveLabel" prefWidth="50.0" text="0" />
-                  </children>
-               </HBox>
+                <HBox alignment="CENTER" spacing="15.0">
+                    <Button mnemonicParsing="false" onAction="#play" text="Play"/>
+                    <Label fx:id="moveLabel" prefWidth="50.0" text="0"/>
+                </HBox>
             </VBox>
          </AnchorPane>
       </center>
