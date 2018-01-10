@@ -16,15 +16,15 @@ public class Time {
     }
 
     public int getMax(BrickPlayer player) {
-        return (int) getTime(player, a -> (double) a.max().getAsInt());
+        return (int) getTime(player, a -> (double) a.max().orElse(0));
     }
 
     public int getMin(BrickPlayer player) {
-        return (int) getTime(player, a -> (double) a.min().getAsInt());
+        return (int) getTime(player, a -> (double) a.min().orElse(0));
     }
 
     public double getAverage(BrickPlayer player) {
-        return getTime(player, a -> a.average().orElse(-1));
+        return getTime(player, a -> a.average().orElse(0));
     }
 
     private double getTime(BrickPlayer player, Function<IntStream, Double> function) {

@@ -1,6 +1,7 @@
 package me.veloxdigitis.bricksj.proxy;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 public interface Algorithm {
 
@@ -10,6 +11,6 @@ public interface Algorithm {
     void terminate();
 
     void send(String message);
-    String read() throws IOException;
+    String read() throws IOException, TimeoutException;
 
 }

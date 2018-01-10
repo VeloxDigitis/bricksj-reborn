@@ -1,14 +1,19 @@
 package me.veloxdigitis.bricksj.proxy;
 
+import com.google.common.util.concurrent.SimpleTimeLimiter;
+import com.google.common.util.concurrent.TimeLimiter;
 import javafx.scene.paint.Color;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.config.InfoFile;
+import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer {
@@ -47,6 +52,9 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
             return time.setDataAndStop(read().equals("ok"));
         } catch (IOException e) {
             return time.setDataAndStop(false);
+        } catch (TimeoutException e) {
+            Logger.error("Timeout exception!");
+            return time.setDataAndStop(false);
         }
     }
 
@@ -77,6 +85,10 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
         try {
             return time.setDataAndStop(Brick.fromString(read()));
         } catch (IOException e) {
+            time.setDataAndStop(null);
+            throw new InvalidBrick();
+        } catch (TimeoutException e) {
+            Logger.error("Timeout exception!");
             time.setDataAndStop(null);
             throw new InvalidBrick();
         }

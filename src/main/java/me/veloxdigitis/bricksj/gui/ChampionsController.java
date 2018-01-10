@@ -75,7 +75,7 @@ public class ChampionsController implements ChangeListener<Number> {
 
         gameSlider.adjustValue(0.0);
         gameSlider.setMax(battle.length());
-        gameSlider.setMajorTickUnit(gameSlider.getMax() / 10);
+        gameSlider.setMajorTickUnit(gameSlider.getMax() > 0 ? gameSlider.getMax() / 10 : 1);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         currentGameLabel.setText(battle.toString());

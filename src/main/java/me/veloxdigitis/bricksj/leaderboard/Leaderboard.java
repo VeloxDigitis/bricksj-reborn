@@ -20,7 +20,7 @@ public class Leaderboard {
                 filter(b -> b.getPlayers().contains(player)).
                 collect(Collectors.toList());
         long games = playerGames.size();
-        long wins = playerGames.stream().filter(b -> b.getWinner() == player).count();
+        long wins = playerGames.stream().filter(p -> p.getWinner() == player).count();
         long loses = games - wins;
 
         int max = playerGames.stream().map(Time::new).mapToInt(t -> t.getMax(player)).max().orElse(-1);

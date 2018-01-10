@@ -9,6 +9,7 @@ import me.veloxdigitis.bricksj.map.InvalidBrick;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BattleHistory {
 
@@ -17,6 +18,8 @@ public class BattleHistory {
     private final List<Brick> startingBricks;
     private final List<PlayerWithBrick> history;
     private BattleEndReason reason = BattleEndReason.UNKNOWN;
+    private BrickPlayer winner;
+
 
     public BattleHistory(PlayersPair players, int mapSize, List<Brick> startingBricks) {
         this.players = players;
@@ -28,6 +31,7 @@ public class BattleHistory {
     public void addToHistory(Brick brick, BrickPlayer player, int time) {
         try {
             this.history.add(new PlayerWithBrick(brick, player, time));
+            this.winner = player;
         } catch (InvalidBrick invalidBrick) {
             Logger.error("Couldn't add " + brick + " to history (invalid move)");
         }
@@ -46,7 +50,7 @@ public class BattleHistory {
     }
 
     public BrickPlayer getWinner() {
-        return history.get(history.size() - 1).getPlayer();
+        return winner;
     }
 
     public PlayersPair getPlayers() {
@@ -57,8 +61,9 @@ public class BattleHistory {
         return startingBricks;
     }
 
-    public void end(BattleEndReason reason) {
+    public void end(BattleEndReason reason, BrickPlayer winner) {
         this.reason = reason;
+        this.winner = winner;
     }
 
     public BattleEndReason getReason() {

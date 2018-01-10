@@ -35,6 +35,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         this.initTime = initTime;
         this.moveTime = moveTime;
         this.history = new BattleHistory(players, mapSize, startingBricks);
+        this.winner = players.get();
     }
 
     @Override
@@ -43,7 +44,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
         Optional<BrickPlayer> mapPlayer = initMap();
         if(mapPlayer.isPresent()) {
-            end(BattleEndReason.OUT_OF_TIME, winner);
+            end(BattleEndReason.OUT_OF_TIME, mapPlayer.get());
             return;
         }
 
@@ -80,7 +81,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
     private void end(BattleEndReason reason, BrickPlayer winner) {
         this.winner = winner;
-        history.end(reason);
+        history.end(reason, winner);
         players.perform(BrickPlayer::endGame);
         invokeListeners(l -> l.end(players.get(), reason));
     }
