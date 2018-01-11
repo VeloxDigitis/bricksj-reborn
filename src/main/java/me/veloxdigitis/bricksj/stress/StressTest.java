@@ -8,6 +8,7 @@ import me.veloxdigitis.bricksj.map.RandomBricks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class StressTest implements Runnable {
 
@@ -50,6 +51,8 @@ public class StressTest implements Runnable {
             player.endGame();
         } catch (InvalidBrick invalidBrick) {
             Logger.error("Invalid move " + player + "!");
+        } catch (TimeoutException e) {
+            Logger.error("Out of time " + player + "!");
         }
         return result;
     }
