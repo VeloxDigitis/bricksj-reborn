@@ -44,6 +44,10 @@ public class Logger {
         Logger.getInstance().listeners.add(listener);
     }
 
+    public static void unregisterAll() {
+        Logger.getInstance().listeners.clear();
+    }
+
     public static void close() {
         Logger.getInstance().listeners.forEach(LogListener::close);
     }

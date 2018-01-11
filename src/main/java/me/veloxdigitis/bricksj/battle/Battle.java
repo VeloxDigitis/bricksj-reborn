@@ -12,6 +12,7 @@ import me.veloxdigitis.bricksj.timer.TimedOperation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeoutException;
 
 public class Battle extends Speaker<BattleListener> implements Runnable{
 
@@ -99,6 +100,8 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
                 return new BrickMove(BattleEndReason.INVALID_MOVE);
         } catch (InvalidBrick invalidBrick) {
             return new BrickMove(BattleEndReason.INVALID_MOVE);
+        } catch (TimeoutException e) {
+            return new BrickMove(BattleEndReason.OUT_OF_TIME);
         }
     }
 

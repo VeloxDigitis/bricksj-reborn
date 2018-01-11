@@ -1,7 +1,5 @@
 package me.veloxdigitis.bricksj.proxy;
 
-import com.google.common.util.concurrent.SimpleTimeLimiter;
-import com.google.common.util.concurrent.TimeLimiter;
 import javafx.scene.paint.Color;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.config.InfoFile;
@@ -12,7 +10,6 @@ import me.veloxdigitis.bricksj.timer.TimedOperation;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -59,12 +56,12 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
     }
 
     @Override
-    public TimedOperation<Brick> move(Brick brick) throws InvalidBrick {
+    public TimedOperation<Brick> move(Brick brick) throws InvalidBrick, TimeoutException {
         return move(brick.toString());
     }
 
     @Override
-    public TimedOperation<Brick> startMove() throws InvalidBrick {
+    public TimedOperation<Brick> startMove() throws InvalidBrick, TimeoutException {
         return move("START");
     }
 
@@ -79,7 +76,7 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
         super.terminate();
     }
 
-    private TimedOperation<Brick> move(String message) throws InvalidBrick {
+    private TimedOperation<Brick> move(String message) throws InvalidBrick, TimeoutException {
         TimedOperation<Brick> time = new TimedOperation<>();
         send(message);
         try {
@@ -90,7 +87,7 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
         } catch (TimeoutException e) {
             Logger.error("Timeout exception!");
             time.setDataAndStop(null);
-            throw new InvalidBrick();
+            throw new TimeoutException();
         }
     }
 }

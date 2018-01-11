@@ -35,6 +35,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
             ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/C", runCommand);
             processBuilder.directory(rootPath.toFile());
             this.process = processBuilder.start();
+            ProcessRegistry.getInstance().register(process);
             this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             this.writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         } catch (IOException e) {
@@ -71,7 +72,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
         try {
             String result = timeLimiter.callWithTimeout(reader::readLine, 2, TimeUnit.SECONDS);
             Logger.info(String.format("%s -> %s", getName(), result.toLowerCase()));
-            return result;
+            return result.toLowerCase();
         } catch (NullPointerException | InterruptedException | ExecutionException e) {
             throw new IOException("Can't read");
         }

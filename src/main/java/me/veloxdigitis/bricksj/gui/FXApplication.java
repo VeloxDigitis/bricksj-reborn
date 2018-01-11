@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.gui;
 
+import com.oracle.tools.packager.Log;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +8,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import me.veloxdigitis.bricksj.logger.Logger;
+import me.veloxdigitis.bricksj.proxy.ProcessRegistry;
 
 import java.io.IOException;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class FXApplication extends Application {
 
@@ -27,6 +31,7 @@ public class FXApplication extends Application {
                     loader.setControllerFactory(controllerFactory);
 
                 Scene scene = new Scene(loader.load());
+                stage.setOnCloseRequest(event -> close());
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.setTitle(title);
@@ -45,13 +50,10 @@ public class FXApplication extends Application {
     }
 
     public static void close() {
+        Logger.close();
+        ProcessRegistry.getInstance().killAll();
         Platform.exit();
-        try {
-            Logger.info("Closing all java applications");
-            Runtime.getRuntime().exec("TASKKILL /F /IM java.exe");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.exit(0);
     }
 
 }

@@ -41,6 +41,7 @@ public class SetupController implements ChampionsListener {
 
     @FXML
     public void initialize() {
+        Logger.unregisterAll();
         this.playersAmount.textProperty().bind(Bindings.size(players).asString().concat(" players"));
         mapSize.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue % 2 != 1)
