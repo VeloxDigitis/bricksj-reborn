@@ -29,10 +29,10 @@ public class SimpleHTMLHistoryInfoParser implements HistoryInfoParser {
                 replaceAll("%title%",       history.toString()).
                 replaceAll("%winner%",      history.getWinner().toString()).
                 replaceAll("%reason%", history.getReason().getMessage()).
-                replaceAll("%a%",       players.get().toString()).
-                replaceAll("%amin%",   time.getMin(players.get()) + "").
-                replaceAll("%amax%",   time.getMax(players.get()) + "").
-                replaceAll("%aavg%",   ((int)(time.getAverage(players.get()) * 100) / 100.0) + "").
+                replaceAll("%a%",       players.getPlayer().toString()).
+                replaceAll("%amin%",   time.getMin(players.getPlayer()) + "").
+                replaceAll("%amax%",   time.getMax(players.getPlayer()) + "").
+                replaceAll("%aavg%",   ((int)(time.getAverage(players.getPlayer()) * 100) / 100.0) + "").
                 replaceAll("%b%",       players.getOpponent().toString()).
                 replaceAll("%bmin%",   time.getMin(players.getOpponent()) + "").
                 replaceAll("%bmax%",   time.getMax(players.getOpponent()) + "").

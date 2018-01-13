@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
+import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.HistoryInfoParser;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
@@ -38,12 +39,14 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @FXML WebView infoView;
 
+    private List<BrickPlayer> players;
     private final List<BattleHistory> history;
     private final HistoryInfoParser parser;
     private final int randomBricks;
     private final Leaderboard leaderboard;
 
-    public ChampionsController(List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser, int randomBricks) {
+    public ChampionsController(List<BrickPlayer> players, List<BattleHistory> history, Leaderboard leaderboard, HistoryInfoParser parser, int randomBricks) {
+        this.players = players;
         this.history = history;
         this.leaderboard = leaderboard;
         this.parser = parser;
@@ -117,25 +120,25 @@ public class ChampionsController implements ChangeListener<Number> {
     @FXML
     public void newChampions() {
         Platform.runLater(() -> {
-            FXApplication.show("setup", "Setup", null);
+            FXApplication.show("setup", "Setup", true, t -> new SetupController(players));
             gameCanvas.getScene().getWindow().hide();
         });
     }
 
     @FXML
     public void openLeaderboard() {
-        Platform.runLater(() -> FXApplication.show("leaderboard", "Leaderboard", t -> new LeaderboardController(leaderboard)));
+        Platform.runLater(() -> FXApplication.show("leaderboard", "Leaderboard", false, t -> new LeaderboardController(leaderboard)));
     }
 
     @FXML
     public void stressTestAll() {
-        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", t ->
+        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", false, t ->
                 new StressTestController(history.stream().flatMap(h -> h.getPlayers().toList().stream()).collect(Collectors.toList()))));
     }
 
     @FXML
     public void stressTest() {
-        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", t ->
+        Platform.runLater(() -> FXApplication.show("stresstest", "Stress Test", false, t ->
                 new StressTestController(historyList.getSelectionModel().getSelectedItem().getPlayers().toList())));
     }
 

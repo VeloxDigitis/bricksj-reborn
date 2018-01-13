@@ -2,6 +2,8 @@ package me.veloxdigitis.bricksj.champions;
 
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -15,12 +17,16 @@ public class PlayersPair {
         this.b = b;
     }
 
-    public BrickPlayer get() {
+    public BrickPlayer getPlayer() {
         return a;
     }
 
     public BrickPlayer getOpponent() {
         return b;
+    }
+
+    public List<BrickPlayer> get() {
+        return Arrays.asList(a, b);
     }
 
     public PlayersPair swap() {

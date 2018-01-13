@@ -36,7 +36,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         this.initTime = initTime;
         this.moveTime = moveTime;
         this.history = new BattleHistory(players, mapSize, startingBricks);
-        this.winner = players.get();
+        this.winner = players.getPlayer();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
         Optional<BrickPlayer> mapPlayer = initMap();
         if(mapPlayer.isPresent()) {
-            end(BattleEndReason.OUT_OF_TIME, mapPlayer.get());
+            end(BattleEndReason.OUT_OF_TIME, players.getPlayer() == mapPlayer.get() ? players.getOpponent() : players.getPlayer());
             return;
         }
 
@@ -53,9 +53,9 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         Brick lastMove = null;
 
         while(validator.anyMove()) {
-            BrickMove move = move(players.get(), lastMove, validator);
+            BrickMove move = move(players.getPlayer(), lastMove, validator);
             if(move.getMove() == BattleEndReason.UNKNOWN) {
-                history.addToHistory(move.getBrick(), players.get(), move.getTime());
+                history.addToHistory(move.getBrick(), players.getPlayer(), move.getTime());
                 players = players.swap();
                 lastMove = move.getBrick();
                 if(validator.isValid(lastMove)) {
@@ -84,7 +84,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         this.winner = winner;
         history.end(reason, winner);
         players.perform(BrickPlayer::endGame);
-        invokeListeners(l -> l.end(players.get(), reason));
+        invokeListeners(l -> l.end(players.getPlayer(), reason));
     }
 
 
@@ -109,11 +109,12 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         this.map = new boolean[mapSize][mapSize];
         startingBricks.forEach(this::put);
 
-        if(players.get().setMap(mapSize, startingBricks).getTime() > initTime)
-            return Optional.of(players.getOpponent());
-        if(players.getOpponent().setMap(mapSize, startingBricks).getTime() > initTime)
-            return Optional.of(players.get());
-        return Optional.empty();
+        return players.get().stream().filter(a -> initMap(a, mapSize, startingBricks)).findFirst();
+    }
+
+    private boolean initMap(BrickPlayer player, int mapSize, List<Brick> startingBricks) {
+        TimedOperation<Boolean> operation = player.setMap(mapSize, startingBricks);
+        return !operation.getData() || operation.getTime() > initTime;
     }
 
     private void put(Brick b) {

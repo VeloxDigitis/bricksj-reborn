@@ -39,6 +39,14 @@ public class SetupController implements ChampionsListener {
     @FXML private CheckBox logToFile;
     @FXML private CheckBox logToSout;
 
+    public SetupController(List<BrickPlayer> players) {
+        this.players.addAll(players);
+    }
+
+    public SetupController() {
+
+    }
+
     @FXML
     public void initialize() {
         Logger.unregisterAll();
@@ -46,14 +54,26 @@ public class SetupController implements ChampionsListener {
         mapSize.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue % 2 != 1)
                 mapSize.getValueFactory().setValue(newValue + 1);
-            else
-                randomBricks.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, (int) (Math.pow(newValue, 2) / 2)));
+            int max = (int) (Math.pow(newValue, 2) / 2);
+            int old = randomBricks.getValue();
+            randomBricks.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, max));
+            randomBricks.getValueFactory().setValue(Math.min(old, max));
+        });
+
+        mapSize.focusedProperty().addListener((s, ov, nv) -> {
+            if (nv) return;
+            FXApplication.commitEditorText(mapSize);
+        });
+
+        randomBricks.focusedProperty().addListener((s, ov, nv) -> {
+            if (nv) return;
+            FXApplication.commitEditorText(mapSize);
         });
     }
 
     @FXML
     public void openPlayersScene() {
-        FXApplication.show("players", "Players", t -> new PlayersController(players));
+        FXApplication.show("players", "Players", false, t -> new PlayersController(players));
     }
 
     @FXML
@@ -100,8 +120,8 @@ public class SetupController implements ChampionsListener {
             progressBar.setProgress(1.0);
             progressBar.getScene().getWindow().hide();
             Logger.close();
-            FXApplication.show("champions", "Judge",
-                    t -> new ChampionsController(history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser(), randomBricks.getValue())).
+            FXApplication.show("champions", "Judge", true,
+                    t -> new ChampionsController(players, history, new Leaderboard(history, players), new SimpleHTMLHistoryInfoParser(), randomBricks.getValue())).
                     setResizable(false);
         });
     }

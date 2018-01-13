@@ -78,7 +78,7 @@
                   <Hyperlink text="github.com/VeloxDigitis/bricksj-reborn" />
                   <Label text="Krzysztof Cybulski" />
                   <Label text="Damian Rybicki" />
-                  <Label text="v 0.9 alpha" />
+                  <Label text="v 1.8 beta" />
                   <BorderPane.margin>
                      <Insets top="5.0" />
                   </BorderPane.margin>

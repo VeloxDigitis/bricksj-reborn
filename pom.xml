@@ -6,7 +6,7 @@
 
     <groupId>me.veloxdigitis.bricksj</groupId>
     <artifactId>bricksj-reborn</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.8-beta-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.9</maven.compiler.source>
