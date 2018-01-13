@@ -31,7 +31,6 @@ public class FXApplication extends Application {
                     loader.setControllerFactory(controllerFactory);
 
                 Scene scene = new Scene(loader.load());
-                stage.setOnCloseRequest(event -> close());
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.setTitle(title);

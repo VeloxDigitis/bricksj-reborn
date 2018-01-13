@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 import me.veloxdigitis.bricksj.leaderboard.Stats;
 
-import java.util.Comparator;
 
 public class LeaderboardController {
 
@@ -39,7 +38,7 @@ public class LeaderboardController {
     private void setChartBar() {
         wins.setTickLabelFormatter(new ChartStringConverter());
         wins.setMinorTickCount(0);
-        wins.setTickUnit(1.0);
+        wins.setTickUnit(2.0);
         wins.setForceZeroInRange(true);
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
