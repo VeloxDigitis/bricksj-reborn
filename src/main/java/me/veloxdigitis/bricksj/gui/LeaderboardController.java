@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 import me.veloxdigitis.bricksj.leaderboard.Stats;
 
+import java.util.Comparator;
+
 public class LeaderboardController {
 
     private final Leaderboard leaderboard;

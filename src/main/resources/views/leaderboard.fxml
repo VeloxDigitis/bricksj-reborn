@@ -24,7 +24,7 @@
                         <PropertyValueFactory property="winRatio"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="50.0" text="Wins">
+                <TableColumn prefWidth="50.0" sortType="DESCENDING" text="Wins">
                     <cellValueFactory>
                         <PropertyValueFactory property="wins"/>
                     </cellValueFactory>

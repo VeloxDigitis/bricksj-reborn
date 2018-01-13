@@ -21,7 +21,7 @@ public class LogsToFile implements LogListener {
     }
 
     public LogsToFile() {
-        this(dateFormat.format(new Date()) + ".log");
+        this("BricksJudge logs " + dateFormat.format( new Date()) + ".log");
     }
 
     @Override

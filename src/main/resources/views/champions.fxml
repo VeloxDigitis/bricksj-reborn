@@ -40,7 +40,7 @@
             </top>
             <bottom>
                 <VBox spacing="5.0" BorderPane.alignment="CENTER">
-                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTestAll" text="Stress test all" />
+                    <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTestAll" text="Stress test all" />
                     <Button defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openLeaderboard" text="Show leaderboard" />
                 </VBox>
             </bottom>
@@ -74,7 +74,7 @@
             <bottom>
                <VBox spacing="5.0" BorderPane.alignment="CENTER">
                   <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Rematch" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTest" text="Stress test" />
+                  <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stressTest" text="Stress test" />
                   <Hyperlink text="github.com/VeloxDigitis/bricksj-reborn" />
                   <Label text="Krzysztof Cybulski" />
                   <Label text="Damian Rybicki" />
