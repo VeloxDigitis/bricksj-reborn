@@ -19,7 +19,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
 
     private Process process;
     private BufferedReader reader;
-    private BufferedWriter writer;
+    private PrintWriter writer;
 
     private final TimeLimiter timeLimiter = SimpleTimeLimiter.create(Executors.newSingleThreadExecutor());
 
@@ -37,7 +37,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
             this.process = processBuilder.start();
             ProcessRegistry.getInstance().register(process);
             this.reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            this.writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+            this.writer = new PrintWriter(process.getOutputStream(), true);
         } catch (IOException e) {
             Logger.error("Couldn't start process");
         }
@@ -48,9 +48,10 @@ public abstract class StandardIOAlgorithm implements Algorithm {
         try {
             Logger.info("Killing " + getName());
             process.destroy();
-            reader.close();
+
             writer.close();
-            Runtime.getRuntime().exec("taskkill /F /pid " + process.pid());
+            reader.close();
+            Logger.info(getName() + " successfully killed");
         } catch (NullPointerException | IOException e) {
             Logger.error("Couldn't communicate with algorithm");
         } catch (NoSuchMethodError e) {
@@ -61,9 +62,8 @@ public abstract class StandardIOAlgorithm implements Algorithm {
     public void send(String message) {
         try {
             Logger.info(String.format("%s <- %s", getName(), message));
-            writer.write(message + "\n");
-            writer.flush();
-        } catch (IOException | NullPointerException e) {
+            writer.println(message);
+        } catch (NullPointerException e) {
             Logger.error("Couldn't communicate with algorithm");
         }
     }
