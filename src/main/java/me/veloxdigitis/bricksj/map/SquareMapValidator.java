@@ -16,7 +16,8 @@ public class SquareMapValidator implements MapValidator {
     public boolean isValid(Brick brick) {
         return Arrays.stream(brick.getSlabs()).
                 noneMatch(s -> s.getX() < 0 || s.getX() >= size ||
-                                s.getY() < 0 || s.getY() >= size);
+                                s.getY() < 0 || s.getY() >= size ||
+                                map[s.getX()][s.getY()]);
     }
 
     @Override
