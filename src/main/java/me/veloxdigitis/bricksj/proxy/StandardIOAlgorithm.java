@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 public abstract class StandardIOAlgorithm implements Algorithm {
 
     private final Path rootPath;
-    private final String runCommand;
+    private final String[] runCommand;
 
     private Process process;
     private BufferedReader reader;
@@ -25,14 +25,15 @@ public abstract class StandardIOAlgorithm implements Algorithm {
 
     public StandardIOAlgorithm(Path rootPath, String runCommand) {
         this.rootPath = rootPath;
-        this.runCommand = runCommand;
+        this.runCommand = RunCommandFormatter.format(rootPath.toAbsolutePath().toString(), runCommand);
     }
 
     @Override
     public void run() {
         try {
             Logger.info("Starting " + getName());
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/C", runCommand);
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command(runCommand);
             processBuilder.directory(rootPath.toFile());
             this.process = processBuilder.start();
             ProcessRegistry.getInstance().register(process);
@@ -47,10 +48,11 @@ public abstract class StandardIOAlgorithm implements Algorithm {
     public void terminate() {
         try {
             Logger.info("Killing " + getName());
-            process.destroy();
 
+            process.destroy();
             writer.close();
             reader.close();
+
             Logger.info(getName() + " successfully killed");
         } catch (NullPointerException | IOException e) {
             Logger.error("Couldn't communicate with algorithm");
