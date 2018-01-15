@@ -12,7 +12,7 @@ public class LogsToFile implements LogListener {
     private static final DateFormat dateFormat = new SimpleDateFormat("MMddHHmmss");
     private PrintWriter writer;
 
-    public LogsToFile(String fileName) {
+    private LogsToFile(String fileName) {
         try {
             this.writer = new PrintWriter(fileName, "UTF-8");
         } catch (FileNotFoundException | UnsupportedEncodingException e) {

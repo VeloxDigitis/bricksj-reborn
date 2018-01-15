@@ -2,12 +2,15 @@ package me.veloxdigitis.bricksj.map;
 
 import me.veloxdigitis.bricksj.logger.Logger;
 
+import java.util.Objects;
+import java.util.Random;
+
 public class Slab {
 
     private static final char JOINER = 'x';
     private final int x, y;
 
-    public Slab(int x, int y) {
+    Slab(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -34,8 +37,26 @@ public class Slab {
         }
     }
 
+    private static final Random random = new Random();
+
+    public static Slab getRandom(int maxX, int maxY) {
+        return new Slab(random.nextInt(maxX), random.nextInt(maxX));
+    }
+
     @Override
     public String toString() {
         return String.format("%d%c%d", x, JOINER, y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof  Slab
+                && x == ((Slab) o).x
+                && y == ((Slab) o).y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChampionsController implements ChangeListener<Number> {
+class ChampionsController implements ChangeListener<Number> {
 
     @FXML TextField search;
     @FXML ListView<BattleHistory> historyList;
@@ -39,7 +39,7 @@ public class ChampionsController implements ChangeListener<Number> {
 
     @FXML WebView infoView;
 
-    private List<BrickPlayer> players;
+    private final List<BrickPlayer> players;
     private final List<BattleHistory> history;
     private final HistoryInfoParser parser;
     private final int randomBricks;
@@ -100,9 +100,7 @@ public class ChampionsController implements ChangeListener<Number> {
         double slabSize = gameCanvas.getWidth() / battle.getMapSize();
 
         gc.setFill(Color.WHITE);
-        battle.getStartingBricks().stream().flatMap(b -> Arrays.stream(b.getSlabs())).forEach(
-                slab -> fillSlab(gc, slab, slabSize)
-        );
+        battle.getStartingSlabs().forEach(slab -> fillSlab(gc, slab, slabSize));
 
         battle.getHistory().
                 stream().

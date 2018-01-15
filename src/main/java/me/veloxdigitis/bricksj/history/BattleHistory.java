@@ -6,25 +6,26 @@ import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
+import me.veloxdigitis.bricksj.map.Slab;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public class BattleHistory {
 
     private final PlayersPair players;
     private final int mapSize;
-    private final List<Brick> startingBricks;
+    private final Collection<Slab> startingSlabs;
     private final List<PlayerWithBrick> history;
     private BattleEndReason reason = BattleEndReason.UNKNOWN;
     private BrickPlayer winner;
 
 
-    public BattleHistory(PlayersPair players, int mapSize, List<Brick> startingBricks) {
+    public BattleHistory(PlayersPair players, int mapSize, Collection<Slab> startingSlabs) {
         this.players = players;
         this.mapSize = mapSize;
-        this.startingBricks = startingBricks;
+        this.startingSlabs = startingSlabs;
         this.history = new ArrayList<>();
     }
 
@@ -57,8 +58,8 @@ public class BattleHistory {
         return players;
     }
 
-    public List<Brick> getStartingBricks() {
-        return startingBricks;
+    public Collection<Slab> getStartingSlabs() {
+        return startingSlabs;
     }
 
     public void end(BattleEndReason reason, BrickPlayer winner) {

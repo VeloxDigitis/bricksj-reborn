@@ -2,7 +2,7 @@ package me.veloxdigitis.bricksj.gui;
 
 import javafx.util.StringConverter;
 
-public class ChartStringConverter extends StringConverter<Number> {
+class ChartStringConverter extends StringConverter<Number> {
 
     @Override
     public String toString(Number object) {

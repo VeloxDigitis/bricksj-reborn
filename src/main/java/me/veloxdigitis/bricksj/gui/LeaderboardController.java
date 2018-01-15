@@ -11,7 +11,7 @@ import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
 import me.veloxdigitis.bricksj.leaderboard.Stats;
 
 
-public class LeaderboardController {
+class LeaderboardController {
 
     private final Leaderboard leaderboard;
 

@@ -2,7 +2,7 @@ package me.veloxdigitis.bricksj.battle;
 
 import me.veloxdigitis.bricksj.map.Brick;
 
-public class BrickMove {
+class BrickMove {
 
     private Brick brick;
     private int time;

@@ -3,14 +3,13 @@ package me.veloxdigitis.bricksj.champions;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class PlayersPair {
 
-    private BrickPlayer a;
-    private BrickPlayer b;
+    private final BrickPlayer a;
+    private final BrickPlayer b;
 
     public PlayersPair(BrickPlayer a, BrickPlayer b) {
         this.a = a;

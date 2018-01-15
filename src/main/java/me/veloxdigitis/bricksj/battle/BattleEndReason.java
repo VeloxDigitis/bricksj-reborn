@@ -7,7 +7,7 @@ public enum BattleEndReason {
     UNKNOWN("Unknown reason"),
     INVALID_MOVE("Invalid move!");
 
-    private String message;
+    private final String message;
 
     BattleEndReason(String message) {
         this.message = message;

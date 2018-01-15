@@ -1,8 +1,8 @@
 package me.veloxdigitis.bricksj.champions;
 
-public class Points {
+class Points {
 
-    int points;
+    private int points;
 
     public Points(int points) {
         this.points = points;

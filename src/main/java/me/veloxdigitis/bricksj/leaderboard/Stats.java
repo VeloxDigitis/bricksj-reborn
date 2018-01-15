@@ -8,7 +8,7 @@ public class Stats {
     private final double winRatio;
     private final long wins;
     private final long loses;
-    private int maxTime;
+    private final int maxTime;
 
     public Stats(BrickPlayer player, double winRatio, long wins, long loses, int maxTime) {
         this.player = player;

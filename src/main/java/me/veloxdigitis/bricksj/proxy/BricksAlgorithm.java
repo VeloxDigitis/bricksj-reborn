@@ -6,10 +6,11 @@ import me.veloxdigitis.bricksj.config.InfoFile;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
+import me.veloxdigitis.bricksj.map.Slab;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -35,13 +36,13 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
     }
 
     @Override
-    public TimedOperation<Boolean> setMap(int size, List<Brick> bricks) {
+    public TimedOperation<Boolean> setMap(int size, Collection<Slab> slabs) {
         super.run();
         StringBuilder message = new StringBuilder(size + "");
-        if(bricks.size() > 0)
+        if(slabs.size() > 0)
             message.append("_").
-                    append(bricks.stream().
-                            map(Brick::toString).
+                    append(slabs.stream().
+                            map(Slab::toString).
                             collect(Collectors.joining("_")));
         TimedOperation<Boolean> time = new TimedOperation<>();
         send(message.toString());

@@ -3,7 +3,7 @@ package me.veloxdigitis.bricksj.proxy;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public interface Algorithm {
+interface Algorithm {
 
     String getName();
 

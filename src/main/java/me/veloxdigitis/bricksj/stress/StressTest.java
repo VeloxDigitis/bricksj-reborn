@@ -4,7 +4,7 @@ import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
-import me.veloxdigitis.bricksj.map.RandomBricks;
+import me.veloxdigitis.bricksj.map.RandomSlabs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class StressTest implements Runnable {
     private final StressListener listener;
     private final int randomBricks;
 
-    public StressTest(List<BrickPlayer> players, int mapSize, int iterations, int randomBricks, StressListener listener) {
+    private StressTest(List<BrickPlayer> players, int mapSize, int iterations, int randomBricks, StressListener listener) {
         this.players = players;
         this.mapSize = mapSize;
         this.iterations = iterations;
@@ -41,7 +41,7 @@ public class StressTest implements Runnable {
     private PlayerStressResult checkPlayer(BrickPlayer player) {
         PlayerStressResult result = new PlayerStressResult(player);
         listener.player(player);
-        player.setMap(mapSize, new RandomBricks(randomBricks, mapSize).getBricks());
+        player.setMap(mapSize, new RandomSlabs(randomBricks, mapSize).getSlabs());
         try {
             player.startMove();
             for (int i = 0; i < iterations; i++) {

@@ -13,7 +13,7 @@ public class Logger {
 
     private final List<LogListener> listeners;
 
-    public Logger() {
+    private Logger() {
         this.listeners = new ArrayList<>();
     }
 

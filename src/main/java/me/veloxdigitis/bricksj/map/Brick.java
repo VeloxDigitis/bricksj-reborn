@@ -9,7 +9,7 @@ public class Brick {
     private static final char JOINER = '_';
     private final Slab[] slabs;
 
-    public Brick(Slab a, Slab b) throws InvalidBrick {
+    protected Brick(Slab a, Slab b) throws InvalidBrick {
         if(!a.isNeighbor(b))
             throw new InvalidBrick();
 
@@ -35,7 +35,7 @@ public class Brick {
     private static final Random random = new Random();
 
     public static Brick getRandom(int mapSize) {
-        Slab main = new Slab(random.nextInt(mapSize - 1) + 1, random.nextInt(mapSize - 1) + 1);
+        Slab main = Slab.getRandom(mapSize, mapSize);
         try {
             return new Brick(main, random.nextBoolean() ?
                     new Slab(main.getX(), main.getY() - 1) :
@@ -46,4 +46,13 @@ public class Brick {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Brick && Arrays.equals(slabs, ((Brick) o).slabs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(slabs);
+    }
 }

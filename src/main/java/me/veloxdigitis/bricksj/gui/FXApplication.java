@@ -22,7 +22,7 @@ public class FXApplication extends Application {
         show("setup", "Setup", primaryStage, true, t -> new SetupController());
     }
 
-    public static void show(String name, String title, Stage stage, boolean closing, Callback<Class<?>, Object> controllerFactory) {
+    private static void show(String name, String title, Stage stage, boolean closing, Callback<Class<?>, Object> controllerFactory) {
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(FXApplication.class.getResource(String.format("/views/%s.fxml", name)));
@@ -50,7 +50,7 @@ public class FXApplication extends Application {
         return stage;
     }
 
-    public static void close() {
+    private static void close() {
         Logger.close();
         ProcessRegistry.getInstance().killAll();
         Platform.exit();

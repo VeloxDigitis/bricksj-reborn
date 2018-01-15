@@ -3,15 +3,10 @@ package me.veloxdigitis.bricksj.battle;
 import me.veloxdigitis.bricksj.Speaker;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
-import me.veloxdigitis.bricksj.map.Brick;
-import me.veloxdigitis.bricksj.map.InvalidBrick;
-import me.veloxdigitis.bricksj.map.MapValidator;
-import me.veloxdigitis.bricksj.map.SquareMapValidator;
+import me.veloxdigitis.bricksj.map.*;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 public class Battle extends Speaker<BattleListener> implements Runnable{
@@ -19,7 +14,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
     private final PlayersPair players;
 
     private final int mapSize;
-    private final List<Brick> startingBricks;
+    private final Collection<Slab> startingSlabs;
     private final int initTime;
     private final int moveTime;
     private boolean map[][];
@@ -28,14 +23,14 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
     private BrickPlayer winner;
 
-    public Battle(PlayersPair players, int mapSize, List<Brick> startingBricks, int initTime, int moveTime, List<BattleListener> listeners) {
+    public Battle(PlayersPair players, int mapSize, Collection<Slab> startingSlabs, int initTime, int moveTime, List<BattleListener> listeners) {
         super(listeners);
         this.players = players;
         this.mapSize = mapSize;
-        this.startingBricks = startingBricks;
+        this.startingSlabs = startingSlabs;
         this.initTime = initTime;
         this.moveTime = moveTime;
-        this.history = new BattleHistory(players, mapSize, startingBricks);
+        this.history = new BattleHistory(players, mapSize, startingSlabs);
         this.winner = players.getPlayer();
     }
 
@@ -107,19 +102,22 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
     private Optional<BrickPlayer> initMap() {
         this.map = new boolean[mapSize][mapSize];
-        startingBricks.forEach(this::put);
+        startingSlabs.forEach(this::put);
 
-        return players.get().stream().filter(a -> initMap(a, mapSize, startingBricks)).findFirst();
+        return players.get().stream().filter(a -> initMap(a, mapSize, startingSlabs)).findFirst();
     }
 
-    private boolean initMap(BrickPlayer player, int mapSize, List<Brick> startingBricks) {
-        TimedOperation<Boolean> operation = player.setMap(mapSize, startingBricks);
+    private boolean initMap(BrickPlayer player, int mapSize, Collection<Slab> startingSlabs) {
+        TimedOperation<Boolean> operation = player.setMap(mapSize, startingSlabs);
         return !operation.getData() || operation.getTime() > initTime;
     }
 
     private void put(Brick b) {
-        Arrays.stream(b.getSlabs()).
-                forEach(s -> map[s.getX()][s.getY()] = true);
+        Arrays.stream(b.getSlabs()).forEach(this::put);
+    }
+
+    private void put(Slab s) {
+       map[s.getX()][s.getY()] = true;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class ProcessRegistry {
         return instance;
     }
 
-    private List<Process> registry = new ArrayList<>();
+    private final List<Process> registry = new ArrayList<>();
 
     public void register(Process p) {
         Logger.info("Registering " + p.toString());

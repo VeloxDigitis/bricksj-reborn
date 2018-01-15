@@ -6,7 +6,7 @@ import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.logger.BricksLogger;
 import me.veloxdigitis.bricksj.logger.Logger;
-import me.veloxdigitis.bricksj.map.RandomBricks;
+import me.veloxdigitis.bricksj.map.RandomSlabs;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,18 +18,18 @@ public class Champions extends Speaker<ChampionsListener> implements Runnable {
 
     private final Map<BrickPlayer, Points> players;
     private final int mapSize;
-    private final int randomBricks;
+    private final int randomSlabs;
     private final int initTime;
     private final int moveTime;
     private final GameSelector selector;
 
     private final List<BattleHistory> history = new ArrayList<>();
 
-    public Champions(List<BrickPlayer> players, int mapSize, int randomBricks, int initTime, int moveTime, GameSelector selector, List<ChampionsListener> listeners) {
+    public Champions(List<BrickPlayer> players, int mapSize, int randomSlabs, int initTime, int moveTime, GameSelector selector, List<ChampionsListener> listeners) {
         super(listeners);
         this.players = players.stream().collect(Collectors.toMap(p -> p, p -> new Points(0)));
         this.mapSize = mapSize;
-        this.randomBricks = randomBricks;
+        this.randomSlabs = randomSlabs;
         this.initTime = initTime;
         this.moveTime = moveTime;
         this.selector = selector;
@@ -42,7 +42,7 @@ public class Champions extends Speaker<ChampionsListener> implements Runnable {
         games.
             stream().
             map(pair -> new Battle(pair, mapSize,
-                    new RandomBricks(randomBricks, mapSize).getBricks(),
+                    new RandomSlabs(randomSlabs, mapSize).getSlabs(),
                     initTime, moveTime,
                     Collections.singletonList(BricksLogger.getInstance()))).
             forEach(game -> {

@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public abstract class Speaker<T> {
 
-    private List<T> listeners;
+    private final List<T> listeners;
 
     protected Speaker(List<T> listeners) {
         this.listeners = listeners;

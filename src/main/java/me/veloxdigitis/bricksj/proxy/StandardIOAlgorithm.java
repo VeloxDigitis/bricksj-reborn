@@ -3,7 +3,6 @@ package me.veloxdigitis.bricksj.proxy;
 import com.google.common.util.concurrent.SimpleTimeLimiter;
 import com.google.common.util.concurrent.TimeLimiter;
 import me.veloxdigitis.bricksj.logger.Logger;
-import org.junit.rules.Timeout;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -23,7 +22,7 @@ public abstract class StandardIOAlgorithm implements Algorithm {
 
     private final TimeLimiter timeLimiter = SimpleTimeLimiter.create(Executors.newSingleThreadExecutor());
 
-    public StandardIOAlgorithm(Path rootPath, String runCommand) {
+    StandardIOAlgorithm(Path rootPath, String runCommand) {
         this.rootPath = rootPath;
         this.runCommand = RunCommandFormatter.format(rootPath.toAbsolutePath().toString(), runCommand);
     }
