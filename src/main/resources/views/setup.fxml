@@ -24,7 +24,7 @@
             <Label text="Move time" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Spinner fx:id="mapSize" editable="true" GridPane.columnIndex="1">
                 <valueFactory>
-                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="99" max="999" min="9" />
+                    <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="2" initialValue="99" max="999" min="3" />
                 </valueFactory>
             </Spinner>
             <Spinner fx:id="randomBricks" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
