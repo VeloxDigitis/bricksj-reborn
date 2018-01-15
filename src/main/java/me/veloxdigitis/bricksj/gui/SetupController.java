@@ -67,7 +67,7 @@ public class SetupController implements ChampionsListener {
 
         randomBricks.focusedProperty().addListener((s, ov, nv) -> {
             if (nv) return;
-            FXApplication.commitEditorText(mapSize);
+            FXApplication.commitEditorText(randomBricks);
         });
     }
 
