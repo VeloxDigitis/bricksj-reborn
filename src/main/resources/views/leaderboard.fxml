@@ -9,34 +9,43 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 
-<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
+<TabPane prefHeight="398.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.veloxdigitis.bricksj.gui.LeaderboardController">
     <Tab text="Table View">
         <TableView fx:id="playersTable" editable="true">
             <columns>
-                <TableColumn prefWidth="340.0" text="Name">
+                <TableColumn prefWidth="272.0" text="Name">
                     <cellValueFactory>
-                        <PropertyValueFactory property="player"/>
+                        <PropertyValueFactory property="player" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn minWidth="0.0" prefWidth="75.0" text="W/L">
+                <TableColumn minWidth="0.0" prefWidth="61.0" text="W/L">
                     <cellValueFactory>
-                        <PropertyValueFactory property="winRatio"/>
+                        <PropertyValueFactory property="winRatio" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="50.0" sortType="DESCENDING" text="Wins">
+                <TableColumn prefWidth="65.0" sortType="DESCENDING" text="Wins">
                     <cellValueFactory>
-                        <PropertyValueFactory property="wins"/>
+                        <PropertyValueFactory property="wins" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="59.0" text="Loses">
+                <TableColumn prefWidth="93.0" sortType="DESCENDING" text="Normal Wins">
                     <cellValueFactory>
-                        <PropertyValueFactory property="loses"/>
+                        <PropertyValueFactory property="winsByNoMove" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn prefWidth="75.0" text="Max time">
+                <TableColumn prefWidth="59.0" sortType="DESCENDING" text="Issues">
                     <cellValueFactory>
-                        <PropertyValueFactory property="maxTime"/>
+                        <PropertyValueFactory property="invalidGames" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="51.0" text="Loses">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="loses" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="98.0" text="Max time">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="maxTime" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>
@@ -45,10 +54,10 @@
     <Tab text="Charts View">
         <BarChart fx:id="bc" barGap="5.0" categoryGap="0.0" legendVisible="false">
             <xAxis>
-                <CategoryAxis label="Name" side="BOTTOM"/>
+                <CategoryAxis label="Name" side="BOTTOM" />
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="wins" label="Wins" side="LEFT"/>
+                <NumberAxis fx:id="wins" label="Wins" side="LEFT" />
             </yAxis>
         </BarChart>
     </Tab>

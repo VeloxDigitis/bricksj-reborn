@@ -23,6 +23,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
     private BrickPlayer winner;
 
+
     public Battle(PlayersPair players, int mapSize, Collection<Slab> startingSlabs, int initTime, int moveTime, List<BattleListener> listeners) {
         super(listeners);
         this.players = players;
