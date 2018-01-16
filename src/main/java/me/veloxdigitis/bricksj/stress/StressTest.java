@@ -4,6 +4,7 @@ import me.veloxdigitis.bricksj.battle.BrickPlayer;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
+import me.veloxdigitis.bricksj.map.ParseException;
 import me.veloxdigitis.bricksj.map.RandomSlabs;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class StressTest implements Runnable {
             Logger.error("Invalid move " + player + "!");
         } catch (TimeoutException e) {
             Logger.error("Out of time " + player + "!");
+        } catch (ParseException e) {
+            Logger.error("Parse error " + player + "!");
         }
         return result;
     }
