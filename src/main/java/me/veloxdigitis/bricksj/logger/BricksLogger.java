@@ -1,9 +1,9 @@
 package me.veloxdigitis.bricksj.logger;
 
 import me.veloxdigitis.bricksj.battle.Battle;
-import me.veloxdigitis.bricksj.battle.BattleEndReason;
 import me.veloxdigitis.bricksj.battle.BattleListener;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
+import me.veloxdigitis.bricksj.battle.reason.BattleEndReason;
 import me.veloxdigitis.bricksj.champions.ChampionsListener;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
@@ -32,7 +32,7 @@ public class BricksLogger implements ChampionsListener, BattleListener{
 
     @Override
     public void end(BrickPlayer winner, BattleEndReason reason) {
-        Logger.info(String.format("%s won this game by %s", winner, reason));
+        Logger.info(String.format("%s won this game by %s", winner, reason.getMessage()));
     }
 
     @Override

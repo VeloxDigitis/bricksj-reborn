@@ -10,10 +10,10 @@ public class Brick {
     private final Slab[] slabs;
 
     protected Brick(Slab a, Slab b) throws InvalidBrick {
-        if(!a.isNeighbor(b))
-            throw new InvalidBrick();
-
         this.slabs = new Slab[]{a, b};
+
+        if(!a.isNeighbor(b))
+            throw new InvalidBrick(this);
     }
 
     public Slab[] getSlabs() {
@@ -27,7 +27,7 @@ public class Brick {
                 collect(Collectors.joining(JOINER + ""));
     }
 
-    public static Brick fromString(String message) throws InvalidBrick {
+    public static Brick fromString(String message) throws ParseException, InvalidBrick {
         String[] elements = message.split(JOINER + "");
         return new Brick(Slab.fromString(elements[0]), Slab.fromString(elements[1]));
     }

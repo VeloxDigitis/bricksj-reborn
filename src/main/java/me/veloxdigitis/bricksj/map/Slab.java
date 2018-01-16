@@ -27,13 +27,13 @@ public class Slab {
         return Math.abs(slab.x - x) == 1 || Math.abs(slab.y - y) == 1;
     }
 
-    public static Slab fromString(String message) throws InvalidBrick {
+    public static Slab fromString(String message) throws ParseException {
         try {
             String[] elements = message.split(JOINER + "");
             return new Slab(Integer.parseInt(elements[0]), Integer.parseInt(elements[1]));
         } catch (NumberFormatException e) {
             Logger.error("Couldn't parse " + message);
-            throw new InvalidBrick();
+            throw new ParseException(message);
         }
     }
 

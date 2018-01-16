@@ -6,6 +6,7 @@ import me.veloxdigitis.bricksj.config.InfoFile;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.InvalidBrick;
+import me.veloxdigitis.bricksj.map.ParseException;
 import me.veloxdigitis.bricksj.map.Slab;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
@@ -57,12 +58,12 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
     }
 
     @Override
-    public TimedOperation<Brick> move(Brick brick) throws InvalidBrick, TimeoutException {
+    public TimedOperation<Brick> move(Brick brick) throws ParseException, InvalidBrick, TimeoutException {
         return move(brick.toString());
     }
 
     @Override
-    public TimedOperation<Brick> startMove() throws InvalidBrick, TimeoutException {
+    public TimedOperation<Brick> startMove() throws ParseException, InvalidBrick, TimeoutException {
         return move("START");
     }
 
@@ -77,18 +78,19 @@ public class BricksAlgorithm extends StandardIOAlgorithm implements BrickPlayer 
         super.terminate();
     }
 
-    private TimedOperation<Brick> move(String message) throws InvalidBrick, TimeoutException {
+    private TimedOperation<Brick> move(String message) throws ParseException, InvalidBrick, TimeoutException {
         TimedOperation<Brick> time = new TimedOperation<>();
         send(message);
         try {
             return time.setDataAndStop(Brick.fromString(read()));
         } catch (IOException e) {
             time.setDataAndStop(null);
-            throw new InvalidBrick();
+            throw new ParseException(message);
         } catch (TimeoutException e) {
             Logger.error("Timeout exception!");
             time.setDataAndStop(null);
             throw new TimeoutException();
         }
+
     }
 }

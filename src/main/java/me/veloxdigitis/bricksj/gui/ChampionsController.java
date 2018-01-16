@@ -16,9 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
+import me.veloxdigitis.bricksj.battle.reason.InvalidMove;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.info.HistoryInfoParser;
 import me.veloxdigitis.bricksj.leaderboard.Leaderboard;
+import me.veloxdigitis.bricksj.map.Brick;
 import me.veloxdigitis.bricksj.map.Slab;
 
 import java.util.Arrays;
@@ -105,10 +107,15 @@ class ChampionsController implements ChangeListener<Number> {
         battle.getHistory().
                 stream().
                 limit(newValue.longValue()).
-                forEach(move -> {
-                    gc.setFill(move.getPlayer().getColor());
-                    Arrays.stream(move.getSlabs()).forEach(slab -> fillSlab(gc, slab, slabSize));
-                });
+                forEach(move -> fillBrick(gc, move.getPlayer().getColor(), move, slabSize));
+
+        if(newValue.doubleValue() == gameSlider.getMax() && battle.getReason() instanceof InvalidMove)
+            fillBrick(gc, Color.rgb(255, 0, 0, 0.5), ((InvalidMove)battle.getReason()).getBrick(), slabSize);
+    }
+
+    private void fillBrick(GraphicsContext gc, Color color, Brick brick, double slabSize) {
+        gc.setFill(color);
+        Arrays.stream(brick.getSlabs()).forEach(slab -> fillSlab(gc, slab, slabSize));
     }
 
     private void fillSlab(GraphicsContext gc, Slab slab, double slabSize) {

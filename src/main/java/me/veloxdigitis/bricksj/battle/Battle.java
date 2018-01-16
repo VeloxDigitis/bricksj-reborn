@@ -1,12 +1,16 @@
 package me.veloxdigitis.bricksj.battle;
 
 import me.veloxdigitis.bricksj.Speaker;
+import me.veloxdigitis.bricksj.battle.reason.*;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.map.*;
 import me.veloxdigitis.bricksj.timer.TimedOperation;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeoutException;
 
 public class Battle extends Speaker<BattleListener> implements Runnable{
@@ -20,9 +24,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
     private boolean map[][];
 
     private final BattleHistory history;
-
     private BrickPlayer winner;
-
 
     public Battle(PlayersPair players, int mapSize, Collection<Slab> startingSlabs, int initTime, int moveTime, List<BattleListener> listeners) {
         super(listeners);
@@ -41,7 +43,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
         Optional<BrickPlayer> mapPlayer = initMap();
         if(mapPlayer.isPresent()) {
-            end(BattleEndReason.OUT_OF_TIME, players.getPlayer() == mapPlayer.get() ? players.getOpponent() : players.getPlayer());
+            end(new DeadlockReason(), players.getPlayer() == mapPlayer.get() ? players.getOpponent() : players.getPlayer());
             return;
         }
 
@@ -50,7 +52,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
 
         while(validator.anyMove()) {
             BrickMove move = move(players.getPlayer(), lastMove, validator);
-            if(move.getMove() == BattleEndReason.UNKNOWN) {
+            if(move.getMove() instanceof UnknownReason) {
                 history.addToHistory(move.getBrick(), players.getPlayer(), move.getTime());
                 players = players.swap();
                 lastMove = move.getBrick();
@@ -65,7 +67,7 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
             }
         }
 
-        end(BattleEndReason.NO_MOVES, players.getOpponent());
+        end(new NoMoreMoves(), players.getOpponent());
     }
 
     public BrickPlayer getWinner() {
@@ -89,15 +91,17 @@ public class Battle extends Speaker<BattleListener> implements Runnable{
         try {
             TimedOperation<Brick> timedBrick = lastMove == null ? player.startMove() : player.move(lastMove);
             if(timedBrick.getTime() > moveTime)
-                return new BrickMove(BattleEndReason.OUT_OF_TIME);
+                return new BrickMove(new OutOfTime(timedBrick.getTime() - moveTime));
             else if(validator.isValid(timedBrick.getData()))
                 return new BrickMove(timedBrick.getData(), timedBrick.getTime());
             else
-                return new BrickMove(BattleEndReason.INVALID_MOVE);
+                return new BrickMove(new InvalidMove(timedBrick.getData()));
         } catch (InvalidBrick invalidBrick) {
-            return new BrickMove(BattleEndReason.INVALID_MOVE);
+            return new BrickMove(new InvalidMove(invalidBrick.getBrick()));
         } catch (TimeoutException e) {
-            return new BrickMove(BattleEndReason.OUT_OF_TIME);
+            return new BrickMove(new DeadlockReason());
+        } catch (ParseException e) {
+            return new BrickMove(new CommunicationReason());
         }
     }
 

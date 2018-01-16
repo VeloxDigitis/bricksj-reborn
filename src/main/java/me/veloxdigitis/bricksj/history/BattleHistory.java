@@ -1,7 +1,8 @@
 package me.veloxdigitis.bricksj.history;
 
-import me.veloxdigitis.bricksj.battle.BattleEndReason;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
+import me.veloxdigitis.bricksj.battle.reason.BattleEndReason;
+import me.veloxdigitis.bricksj.battle.reason.UnknownReason;
 import me.veloxdigitis.bricksj.champions.PlayersPair;
 import me.veloxdigitis.bricksj.logger.Logger;
 import me.veloxdigitis.bricksj.map.Brick;
@@ -18,7 +19,7 @@ public class BattleHistory {
     private final int mapSize;
     private final Collection<Slab> startingSlabs;
     private final List<PlayerWithBrick> history;
-    private BattleEndReason reason = BattleEndReason.UNKNOWN;
+    private BattleEndReason reason = new UnknownReason();
     private BrickPlayer winner;
 
 

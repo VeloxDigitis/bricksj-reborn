@@ -1,5 +1,6 @@
 package me.veloxdigitis.bricksj.battle;
 
+import me.veloxdigitis.bricksj.battle.reason.BattleEndReason;
 import me.veloxdigitis.bricksj.map.Brick;
 
 public interface BattleListener {

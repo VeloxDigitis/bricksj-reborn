@@ -1,5 +1,7 @@
 package me.veloxdigitis.bricksj.battle;
 
+import me.veloxdigitis.bricksj.battle.reason.BattleEndReason;
+import me.veloxdigitis.bricksj.battle.reason.UnknownReason;
 import me.veloxdigitis.bricksj.map.Brick;
 
 class BrickMove {
@@ -13,7 +15,7 @@ class BrickMove {
     }
 
     public BrickMove(Brick brick, int time) {
-        this(BattleEndReason.UNKNOWN);
+        this(new UnknownReason());
         this.brick = brick;
         this.time = time;
     }

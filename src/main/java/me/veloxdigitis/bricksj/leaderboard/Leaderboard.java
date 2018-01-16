@@ -1,7 +1,8 @@
 package me.veloxdigitis.bricksj.leaderboard;
 
-import me.veloxdigitis.bricksj.battle.BattleEndReason;
 import me.veloxdigitis.bricksj.battle.BrickPlayer;
+import me.veloxdigitis.bricksj.battle.reason.BattleEndReason;
+import me.veloxdigitis.bricksj.battle.reason.NoMoreMoves;
 import me.veloxdigitis.bricksj.history.BattleHistory;
 import me.veloxdigitis.bricksj.stats.Time;
 
@@ -24,10 +25,9 @@ public class Leaderboard {
                 collect(Collectors.toList());
         long games = playerGames.size();
         long wins = playerGames.stream().filter(p -> p.getWinner() == player).count();
-        long winsByNoMove = playerGames.stream().filter(p -> p.getWinner() == player && p.getReason() == BattleEndReason.NO_MOVES).count();
-        long invalidGames = playerGames.stream().filter(p ->
-        ((p.getPlayers().getOpponent() == player && p.getWinner() != player) || (p.getPlayers().getPlayer() == player && p.getWinner() != player))
-        && p.getReason() != BattleEndReason.NO_MOVES ).count() ;
+        long winsByNoMove = playerGames.stream().filter(p -> p.getWinner() == player && p.getReason() instanceof NoMoreMoves).count();
+        long invalidGames = playerGames.stream().filter(p -> p.getPlayers().contains(player) && p.getWinner() != player).
+                filter(p -> !(p.getReason() instanceof NoMoreMoves)).count() ;
 
         long loses = games - wins;
 
